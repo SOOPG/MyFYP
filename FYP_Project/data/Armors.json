@@ -1,0 +1,5 @@
+[
+null,
+{"id":1,"atypeId":1,"description":"This armor may save you from peril","etypeId":2,"traits":[],"iconIndex":137,"name":"Kevlar Armor","note":"","params":[0,0,0,5,0,0,0,0],"price":2},
+{"id":2,"atypeId":1,"description":"A headgear that shines light, perfect for defending against shadows","etypeId":3,"traits":[{"code":22,"dataId":1,"value":0}],"iconIndex":130,"name":"Tactical Light","note":"","params":[0,0,0,0,0,0,0,0],"price":0}
+]
