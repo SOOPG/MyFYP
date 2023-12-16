@@ -1,2 +1,2 @@
-
-FYP_Project/img/tilesets/floodlight.png
+# Godot 4+ specific ignores
+.godot/

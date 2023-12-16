@@ -1,6 +1,0 @@
-[
-null,
-{"id":1,"animationId":111,"description":"A range weapon that consumes ammo.","etypeId":1,"traits":[{"code":31,"dataId":1,"value":0},{"code":22,"dataId":0,"value":0},{"code":51,"dataId":2,"value":1}],"iconIndex":115,"name":"Pistol","note":"","params":[0,0,1,0,0,0,0,0],"price":0,"wtypeId":2},
-{"id":2,"animationId":6,"description":"A utensil for cooking and self defense at desperate times...","etypeId":1,"traits":[{"code":31,"dataId":1,"value":0},{"code":22,"dataId":0,"value":0},{"code":51,"dataId":1,"value":1}],"iconIndex":112,"name":"Knife","note":"","params":[0,0,1,0,0,0,0,0],"price":0,"wtypeId":1},
-{"id":3,"animationId":97,"description":"A source of light for during the middle of night","etypeId":1,"traits":[{"code":31,"dataId":2,"value":0},{"code":22,"dataId":0,"value":0},{"code":43,"dataId":4,"value":1},{"code":51,"dataId":3,"value":1}],"iconIndex":243,"name":"Flashlight","note":"","params":[0,0,1,0,0,0,0,0],"price":0,"wtypeId":3}
-]
