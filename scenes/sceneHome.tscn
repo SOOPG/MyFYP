@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://5ubmcimyc6ck"]
+
+[ext_resource type="Texture2D" uid="uid://dy56vkfeh8245" path="res://assets/scenes/apartment/room_base_time_1.png" id="1_4n0q8"]
+[ext_resource type="Texture2D" uid="uid://nypgqvcwp3ls" path="res://assets/sprites/ui/status_bars/energy/energy_level_100.png" id="2_bpdr4"]
+[ext_resource type="Texture2D" uid="uid://c7edoshb1f4ya" path="res://assets/sprites/ui/status_bars/stress/stress_level_0.png" id="3_jeapt"]
+[ext_resource type="Texture2D" uid="uid://bkw11jqy5yvax" path="res://assets/sprites/ui/status_bars/study/study_level_0.png" id="4_5kesd"]
+[ext_resource type="Texture2D" uid="uid://b6c458echisvw" path="res://assets/sprites/ui/status_bars/calendar/day_1.png" id="5_2nqvh"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576.5, 324)
+scale = Vector2(1.79844, 1.8)
+texture = ExtResource("1_4n0q8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 62.0
+color = Color(0, 0, 0, 0.654902)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 62.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="energy_level" type="Sprite2D" parent="ColorRect/HBoxContainer/TextureProgressBar"]
+position = Vector2(115, 31)
+scale = Vector2(1.8, 1.85)
+texture = ExtResource("2_bpdr4")
+
+[node name="TextureProgressBar2" type="TextureProgressBar" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="stress_level" type="Sprite2D" parent="ColorRect/HBoxContainer/TextureProgressBar2"]
+position = Vector2(365, 31)
+scale = Vector2(1.8, 1.85)
+texture = ExtResource("3_jeapt")
+
+[node name="TextureProgressBar3" type="TextureProgressBar" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="study_level" type="Sprite2D" parent="ColorRect/HBoxContainer/TextureProgressBar3"]
+position = Vector2(610, 31)
+scale = Vector2(1.8, 1.85)
+texture = ExtResource("4_5kesd")
+
+[node name="TextureProgressBar4" type="TextureProgressBar" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="day" type="Sprite2D" parent="ColorRect/HBoxContainer/TextureProgressBar4"]
+position = Vector2(1104, 31)
+scale = Vector2(1.40033, 1.48142)
+texture = ExtResource("5_2nqvh")
