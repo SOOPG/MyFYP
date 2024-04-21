@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://7ox8svec3gpw"]
+
+[ext_resource type="Texture2D" uid="uid://dlm5jigfors4t" path="res://assets/scenes/menus/tutorial_1.png" id="1_35ik7"]
+[ext_resource type="Script" path="res://scripts/Tutorial.gd" id="1_dsfhi"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_dsfhi")
+
+[node name="tutorial_page" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_35ik7")
+
+[node name="next" type="Button" parent="tutorial_page"]
+offset_left = 677.0
+offset_top = 250.0
+offset_right = 952.0
+offset_bottom = 526.0
+
+[connection signal="pressed" from="tutorial_page/next" to="." method="_on_next_pressed"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://5ubmcimyc6ck"]
+[gd_scene load_steps=7 format=3 uid="uid://5ubmcimyc6ck"]
 
 [ext_resource type="Texture2D" uid="uid://dy56vkfeh8245" path="res://assets/scenes/apartment/room_base_time_1.png" id="1_4n0q8"]
 [ext_resource type="Texture2D" uid="uid://nypgqvcwp3ls" path="res://assets/sprites/ui/status_bars/energy/energy_level_100.png" id="2_bpdr4"]
 [ext_resource type="Texture2D" uid="uid://c7edoshb1f4ya" path="res://assets/sprites/ui/status_bars/stress/stress_level_0.png" id="3_jeapt"]
 [ext_resource type="Texture2D" uid="uid://bkw11jqy5yvax" path="res://assets/sprites/ui/status_bars/study/study_level_0.png" id="4_5kesd"]
 [ext_resource type="Texture2D" uid="uid://b6c458echisvw" path="res://assets/sprites/ui/status_bars/calendar/day_1.png" id="5_2nqvh"]
+[ext_resource type="Texture2D" uid="uid://0vjn7bgujolp" path="res://assets/sprites/ui/status_bars/money/money_ui.png" id="5_i600v"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
@@ -43,14 +44,22 @@ texture = ExtResource("3_jeapt")
 layout_mode = 2
 
 [node name="study_level" type="Sprite2D" parent="ColorRect/HBoxContainer/TextureProgressBar3"]
-position = Vector2(610, 31)
+position = Vector2(620, 31)
 scale = Vector2(1.8, 1.85)
 texture = ExtResource("4_5kesd")
 
 [node name="TextureProgressBar4" type="TextureProgressBar" parent="ColorRect/HBoxContainer"]
 layout_mode = 2
 
-[node name="day" type="Sprite2D" parent="ColorRect/HBoxContainer/TextureProgressBar4"]
+[node name="money_ui" type="Sprite2D" parent="ColorRect/HBoxContainer/TextureProgressBar4"]
+position = Vector2(860, 31)
+scale = Vector2(1.8, 1.19329)
+texture = ExtResource("5_i600v")
+
+[node name="TextureProgressBar5" type="TextureProgressBar" parent="ColorRect/HBoxContainer"]
+layout_mode = 2
+
+[node name="day" type="Sprite2D" parent="ColorRect/HBoxContainer/TextureProgressBar5"]
 position = Vector2(1104, 31)
 scale = Vector2(1.40033, 1.48142)
 texture = ExtResource("5_2nqvh")
