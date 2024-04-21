@@ -1,13 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://5ubmcimyc6ck"]
+[gd_scene load_steps=10 format=3 uid="uid://5ubmcimyc6ck"]
 
 [ext_resource type="Texture2D" uid="uid://dy56vkfeh8245" path="res://assets/scenes/apartment/room_base_time_1.png" id="1_4n0q8"]
+[ext_resource type="Script" path="res://scripts/sceneHomeHandler.gd" id="1_bwsg2"]
 [ext_resource type="Texture2D" uid="uid://nypgqvcwp3ls" path="res://assets/sprites/ui/status_bars/energy/energy_level_100.png" id="2_bpdr4"]
 [ext_resource type="Texture2D" uid="uid://c7edoshb1f4ya" path="res://assets/sprites/ui/status_bars/stress/stress_level_0.png" id="3_jeapt"]
 [ext_resource type="Texture2D" uid="uid://bkw11jqy5yvax" path="res://assets/sprites/ui/status_bars/study/study_level_0.png" id="4_5kesd"]
 [ext_resource type="Texture2D" uid="uid://b6c458echisvw" path="res://assets/sprites/ui/status_bars/calendar/day_1.png" id="5_2nqvh"]
 [ext_resource type="Texture2D" uid="uid://0vjn7bgujolp" path="res://assets/sprites/ui/status_bars/money/money_ui.png" id="5_i600v"]
+[ext_resource type="Texture2D" uid="uid://cmpxf573xnmbm" path="res://assets/sprites/environments/interact_icon.png" id="7_nfmm5"]
+[ext_resource type="Texture2D" uid="uid://bfw1vt15xotws" path="res://assets/sprites/environments/map_icon.png" id="8_b3opd"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_bwsg2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(576.5, 324)
@@ -63,3 +67,42 @@ layout_mode = 2
 position = Vector2(1104, 31)
 scale = Vector2(1.40033, 1.48142)
 texture = ExtResource("5_2nqvh")
+
+[node name="BedControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 42.0
+offset_top = 315.0
+offset_right = 305.0
+offset_bottom = 519.0
+
+[node name="bed_hover" type="Sprite2D" parent="BedControl"]
+position = Vector2(149, 115)
+scale = Vector2(1.5625, 1.65625)
+texture = ExtResource("7_nfmm5")
+
+[node name="StudyControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 337.0
+offset_top = 229.0
+offset_right = 652.0
+offset_bottom = 459.0
+
+[node name="study_hover" type="Sprite2D" parent="StudyControl"]
+position = Vector2(156, 147)
+scale = Vector2(1.5625, 1.65625)
+texture = ExtResource("7_nfmm5")
+
+[node name="DoorControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1009.0
+offset_top = 63.0
+offset_right = 1152.0
+offset_bottom = 555.0
+
+[node name="door_hover" type="Sprite2D" parent="DoorControl"]
+position = Vector2(92, 222)
+scale = Vector2(1.78125, 2.24219)
+texture = ExtResource("8_b3opd")

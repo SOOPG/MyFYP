@@ -1,11 +1,21 @@
 extends CanvasLayer
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
+func _on_button_newgame_pressed():
+	# Start game
+	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+
+func _on_button_tutorial_pressed():
+	get_tree().change_scene_to_file("res://scenes/sceneTutorial.tscn")
+
+
+func _on_button_exit_pressed():
+	# Close the game
+	get_tree().quit()  
+
+func _on_button_volume_pressed():
+	pass # Replace with function body.
