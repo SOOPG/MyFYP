@@ -68,14 +68,13 @@ position = Vector2(576.5, 324)
 scale = Vector2(1.79844, 1.8)
 texture = ExtResource("1_4n0q8")
 
-[node name="Message" type="Label" parent="."]
+[node name="Msg_goto_class" type="Label" parent="."]
 offset_left = 337.0
 offset_top = 579.0
 offset_right = 776.37
 offset_bottom = 629.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 35
-horizontal_alignment = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1152.0
@@ -165,7 +164,6 @@ position = Vector2(576, 324)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("10_swu7j")
 
-[connection signal="pressed" from="BedButton" to="." method="_on_bed_button_pressed"]
 [connection signal="pressed" from="StudyButton" to="." method="_on_study_button_pressed"]
 [connection signal="pressed" from="DoorButton" to="." method="_on_door_button_pressed"]
 [connection signal="animation_finished" from="attendClassAnimationPlayer" to="." method="_on_attendClassAnimationFinished"]
