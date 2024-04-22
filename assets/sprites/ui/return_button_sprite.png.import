@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://w73ex6tvshqn"
-path="res://.godot/imported/location_selector_menu.png-5ecb12e9bffe13fd63aea47f9c31bdc8.ctex"
+uid="uid://dkw2iaywngikn"
+path="res://.godot/imported/return_button_sprite.png-c765bf5f8e28b02eb95f4f3ecfe94246.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/scenes/menus/location_selector_menu.png"
-dest_files=["res://.godot/imported/location_selector_menu.png-5ecb12e9bffe13fd63aea47f9c31bdc8.ctex"]
+source_file="res://assets/sprites/ui/return_button_sprite.png"
+dest_files=["res://.godot/imported/return_button_sprite.png-c765bf5f8e28b02eb95f4f3ecfe94246.ctex"]
 
 [params]
 
