@@ -29,11 +29,6 @@ func update_room_sprite():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Hover sprites are not visible at the start
-	bed_hover_icon.visible = false
-	study_hover_icon.visible = false
-	door_hover_icon.visible = false
-
 	# Connect the mouse_entered and mouse_exited signals
 	bed_button.mouse_entered.connect(self._on_bed_mouse_entered)
 	bed_button.mouse_exited.connect(self._on_bed_mouse_exited)
@@ -43,7 +38,6 @@ func _ready():
 
 	door_button.mouse_entered.connect(self._on_door_mouse_entered)
 	door_button.mouse_exited.connect(self._on_door_mouse_exited)
-
 
 func _on_bed_mouse_entered():
 	bed_hover_icon.visible = true
@@ -61,7 +55,15 @@ func _on_door_mouse_exited():
 func _on_door_button_pressed():
 	if current_time_of_day == TimeOfDay.MORNING:
 		#If morning, attend class when clicked on door
-		get_tree().change_scene_to_file("res://scenes/sceneAttendClass.tscn")
+		$attendClassAnimationPlayer.play("attendClass")
+		$attendClassAnimationPlayer/sceneClassroom.visible = true
 	else:
 		#Go to the selector menu
-		get_tree().change_scene_to_file("res://scenes/sceneMainMenu.tscn")
+		get_tree().change_scene_to_file("res://scenes/sceneLocationSelectorMenu.tscn")
+
+func _on_attendClassAnimationFinished(anim_name):
+	if anim_name == "attendClass":
+		# Hide the classroom sprite and handle any other logic necessary after the class
+		$attendClassAnimationPlayer/sceneClassroom.visible = false
+		current_time_of_day = TimeOfDay.AFTERNOON
+		update_room_sprite()

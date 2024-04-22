@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://dklwqgw6bemws"]
+
+[ext_resource type="Texture2D" uid="uid://w73ex6tvshqn" path="res://assets/scenes/menus/location_selector_menu.png" id="1_id7e5"]
+[ext_resource type="Script" path="res://scripts/LocationNavigator.gd" id="1_lxxm5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n3fvx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v2w16"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lmg03"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qtwds"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_lxxm5")
+
+[node name="locationSelectorMenu" type="Sprite2D" parent="."]
+position = Vector2(577, 325)
+scale = Vector2(1.79688, 1.8)
+texture = ExtResource("1_id7e5")
+
+[node name="returnButton" type="Button" parent="locationSelectorMenu"]
+offset_left = 227.0
+offset_top = -175.0
+offset_right = 317.0
+offset_bottom = -85.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_n3fvx")
+
+[node name="hangoutButton" type="Button" parent="locationSelectorMenu"]
+offset_left = 32.0
+offset_top = -173.0
+offset_right = 186.0
+offset_bottom = -10.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_v2w16")
+
+[node name="workButton" type="Button" parent="locationSelectorMenu"]
+offset_left = -302.0
+offset_top = -169.0
+offset_right = -151.0
+offset_bottom = -5.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lmg03")
+
+[node name="homeButton" type="Button" parent="locationSelectorMenu"]
+offset_left = -132.0
+offset_top = 11.0
+offset_right = 21.0
+offset_bottom = 177.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qtwds")
+
+[connection signal="pressed" from="locationSelectorMenu/returnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="locationSelectorMenu/hangoutButton" to="." method="_on_hangout_button_pressed"]
+[connection signal="pressed" from="locationSelectorMenu/workButton" to="." method="_on_work_button_pressed"]
+[connection signal="pressed" from="locationSelectorMenu/homeButton" to="." method="_on_home_button_pressed"]

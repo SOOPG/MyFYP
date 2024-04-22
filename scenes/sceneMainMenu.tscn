@@ -1,7 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://88avxgw77cs5"]
+[gd_scene load_steps=7 format=3 uid="uid://88avxgw77cs5"]
 
 [ext_resource type="Texture2D" uid="uid://cx5ityv6rqyek" path="res://assets/scenes/menus/main_menu.png" id="1_48mwj"]
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_b1gfv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_icvod"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hag5m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a76we"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fqff0"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_b1gfv")
@@ -16,24 +24,28 @@ offset_left = -70.0
 offset_top = -21.0
 offset_right = 67.0
 offset_bottom = 18.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_icvod")
 
 [node name="button_tutorial" type="Button" parent="Sprite2D"]
 offset_left = -69.0
 offset_top = 37.0
 offset_right = 68.0
 offset_bottom = 76.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hag5m")
 
 [node name="button_exit" type="Button" parent="Sprite2D"]
 offset_left = -70.0
 offset_top = 94.0
 offset_right = 67.0
 offset_bottom = 133.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_a76we")
 
 [node name="button_volume" type="Button" parent="Sprite2D"]
 offset_left = -299.0
 offset_top = 44.0
 offset_right = -191.0
 offset_bottom = 153.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fqff0")
 
 [connection signal="pressed" from="Sprite2D/button_newgame" to="." method="_on_button_newgame_pressed"]
 [connection signal="pressed" from="Sprite2D/button_tutorial" to="." method="_on_button_tutorial_pressed"]

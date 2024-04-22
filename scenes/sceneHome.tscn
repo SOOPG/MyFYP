@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://5ubmcimyc6ck"]
+[gd_scene load_steps=20 format=3 uid="uid://5ubmcimyc6ck"]
 
 [ext_resource type="Texture2D" uid="uid://dy56vkfeh8245" path="res://assets/scenes/apartment/room_base_time_1.png" id="1_4n0q8"]
 [ext_resource type="Script" path="res://scripts/sceneHomeHandler.gd" id="1_bwsg2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://0vjn7bgujolp" path="res://assets/sprites/ui/status_bars/money/money_ui.png" id="5_i600v"]
 [ext_resource type="Texture2D" uid="uid://cmpxf573xnmbm" path="res://assets/sprites/environments/interact_icon.png" id="7_nfmm5"]
 [ext_resource type="Texture2D" uid="uid://bfw1vt15xotws" path="res://assets/sprites/environments/map_icon.png" id="8_b3opd"]
+[ext_resource type="Texture2D" uid="uid://3r7ajxunn8tq" path="res://assets/scenes/university/room_lecture.png" id="10_swu7j"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oi0sv"]
 
@@ -21,6 +22,43 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1afik"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vuxge"]
+
+[sub_resource type="Animation" id="Animation_7c43s"]
+resource_name = "attendClass"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("attendClassAnimationPlayer/sceneClassroom:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lwofy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("attendClassAnimationPlayer/sceneClassroom:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6nwt3"]
+_data = {
+"RESET": SubResource("Animation_lwofy"),
+"attendClass": SubResource("Animation_7c43s")
+}
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_bwsg2")
@@ -89,6 +127,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_oi0sv")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_56sqf")
 
 [node name="bed_hover" type="Sprite2D" parent="BedButton"]
+visible = false
 position = Vector2(126, 101)
 scale = Vector2(1.5625, 1.65625)
 texture = ExtResource("7_nfmm5")
@@ -102,6 +141,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_lyyhm")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_5j6pc")
 
 [node name="study_hover" type="Sprite2D" parent="StudyButton"]
+visible = false
 position = Vector2(156, 147)
 scale = Vector2(1.5625, 1.65625)
 texture = ExtResource("7_nfmm5")
@@ -115,8 +155,22 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_1afik")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_vuxge")
 
 [node name="door_hover" type="Sprite2D" parent="DoorButton"]
+visible = false
 position = Vector2(92, 222)
 scale = Vector2(1.78125, 2.24219)
 texture = ExtResource("8_b3opd")
 
+[node name="attendClassAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6nwt3")
+}
+
+[node name="sceneClassroom" type="Sprite2D" parent="attendClassAnimationPlayer"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+position = Vector2(576, 324)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("10_swu7j")
+
 [connection signal="pressed" from="DoorButton" to="." method="_on_door_button_pressed"]
+[connection signal="animation_finished" from="attendClassAnimationPlayer" to="." method="_on_attendClassAnimationFinished"]
