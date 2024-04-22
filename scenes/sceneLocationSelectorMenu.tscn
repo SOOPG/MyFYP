@@ -34,17 +34,17 @@ offset_bottom = -10.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_v2w16")
 
 [node name="workButton" type="Button" parent="locationSelectorMenu"]
-offset_left = -302.0
-offset_top = -169.0
-offset_right = -151.0
-offset_bottom = -5.0
-theme_override_styles/normal = SubResource("StyleBoxEmpty_lmg03")
-
-[node name="homeButton" type="Button" parent="locationSelectorMenu"]
 offset_left = -132.0
 offset_top = 11.0
 offset_right = 21.0
 offset_bottom = 177.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_lmg03")
+
+[node name="homeButton" type="Button" parent="locationSelectorMenu"]
+offset_left = -302.0
+offset_top = -172.0
+offset_right = -152.0
+offset_bottom = -6.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_qtwds")
 
 [connection signal="pressed" from="locationSelectorMenu/returnButton" to="." method="_on_return_button_pressed"]

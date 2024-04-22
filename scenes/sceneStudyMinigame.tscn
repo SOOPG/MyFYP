@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpops05108jmn"]
+
+[ext_resource type="Texture2D" uid="uid://4bc0nxicp3n0" path="res://assets/scenes/minigames/study/minigame_study_scene.png" id="1_r855h"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="study" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("1_r855h")

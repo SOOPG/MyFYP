@@ -68,16 +68,6 @@ position = Vector2(576.5, 324)
 scale = Vector2(1.79844, 1.8)
 texture = ExtResource("1_4n0q8")
 
-[node name="Msg_goto_class" type="Label" parent="."]
-visible = false
-offset_left = 337.0
-offset_top = 579.0
-offset_right = 776.37
-offset_bottom = 629.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 35
-text = "I need to attend class first"
-
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1152.0
 offset_bottom = 62.0
@@ -139,6 +129,15 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_5j6pc")
 position = Vector2(156, 147)
 scale = Vector2(1.5625, 1.65625)
 texture = ExtResource("7_nfmm5")
+
+[node name="Label" type="Label" parent="StudyButton"]
+layout_mode = 0
+offset_top = 350.0
+offset_right = 439.37
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "I need to attend class first"
 
 [node name="DoorButton" type="Button" parent="."]
 offset_left = 1009.0

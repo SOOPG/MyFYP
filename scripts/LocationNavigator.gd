@@ -11,11 +11,11 @@ func _on_return_button_pressed():
 
 
 func _on_hangout_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+	get_tree().change_scene_to_file("res://scenes/sceneLocationHangout.tscn")
 
 
 func _on_work_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+	get_tree().change_scene_to_file("res://scenes/sceneWorkMinigame.tscn")
 
 
 func _on_home_button_pressed():

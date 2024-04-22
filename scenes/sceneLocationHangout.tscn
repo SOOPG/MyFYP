@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6sm4avdm4qsd"]
+
+[ext_resource type="Texture2D" uid="uid://dymswbc1scham" path="res://assets/scenes/hangout/hangout.png" id="1_q1l7u"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="hangout" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("1_q1l7u")
