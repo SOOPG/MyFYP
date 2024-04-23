@@ -47,6 +47,15 @@ offset_right = -152.0
 offset_bottom = -6.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_qtwds")
 
+[node name="statCheckerMsg" type="Label" parent="."]
+offset_left = 691.0
+offset_top = 491.0
+offset_right = 1081.0
+offset_bottom = 536.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+
 [connection signal="pressed" from="locationSelectorMenu/returnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="locationSelectorMenu/hangoutButton" to="." method="_on_hangout_button_pressed"]
 [connection signal="pressed" from="locationSelectorMenu/workButton" to="." method="_on_work_button_pressed"]

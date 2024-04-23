@@ -15,3 +15,24 @@ var stress = 0
 var study = 0
 #var money = 0
 var day = 1
+
+var playerHasDoneHangout = false
+var playerHasDoneJob = false
+var playerHasDoneStudy = false
+
+var hangout_fact_index = 0
+
+func modify_player_stats(energyModifer,stressModifer,studyModifer):
+	energy = energy + energyModifer
+	stress = stress + stressModifer
+	study += study + studyModifer
+	
+	energy = clamp(energy, 0, 100)
+	stress = clamp(stress, 0, 100)
+	study = clamp(study, 0, 100)
+	# money += money_change 
+
+func reset_player_interaction():
+	playerHasDoneHangout = false
+	playerHasDoneJob = false
+	playerHasDoneStudy = false

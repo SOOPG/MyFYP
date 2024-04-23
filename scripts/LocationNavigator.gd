@@ -1,17 +1,32 @@
 extends CanvasLayer
 
+func dispMsgToClass(label: Label, message: String, duration: float):
+	if not label:
+		print("Label node is not valid.")
+		return
+
+	label.text = message  # Set the message text passed to the function
+	label.visible = true  # Make the label visible
+
+	await get_tree().create_timer(3).timeout
+	label.visible = false  # Hide the label
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
 
 func _on_return_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
 
 
 func _on_hangout_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/sceneLocationHangout.tscn")
+	if GameState.playerHasDoneHangout == true:
+		dispMsgToClass($statCheckerMsg, "I've done hangout already...", 3.0)
+	elif GameState.energy < 30:
+		#Show a text to saw I've already hangout today....
+		dispMsgToClass($statCheckerMsg, "I'm too tired...", 3.0)
+	else:
+		get_tree().change_scene_to_file("res://scenes/sceneLocationHangout.tscn")
 
 
 func _on_work_button_pressed():

@@ -215,6 +215,8 @@ func _on_sleep_animation_player_animation_finished(anim_name):
 	if anim_name == "sleep":
 		#Advance to the next day, set as morning
 		GameState.current_time_of_day = GameState.TimeOfDay.MORNING
+		#reset Player Has Done Study, Work, Hangout
+		GameState.reset_player_interaction()
 		update_room_to_time()
 		#Increase Energy, Decrease Stress. Advances Time
 		update_energy_display(50)

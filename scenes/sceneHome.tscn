@@ -24,6 +24,21 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vuxge"]
 
+[sub_resource type="Animation" id="Animation_lwofy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("attendClassAnimationPlayer/sceneClassroom:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_7c43s"]
 resource_name = "attendClass"
 length = 4.0
@@ -40,25 +55,25 @@ tracks/0/keys = {
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_lwofy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6nwt3"]
+_data = {
+"RESET": SubResource("Animation_lwofy"),
+"attendClass": SubResource("Animation_7c43s")
+}
+
+[sub_resource type="Animation" id="Animation_iqucu"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("attendClassAnimationPlayer/sceneClassroom:modulate")
+tracks/0/path = NodePath("sleepAnimationPlayer/sleepFact:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6nwt3"]
-_data = {
-"RESET": SubResource("Animation_lwofy"),
-"attendClass": SubResource("Animation_7c43s")
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_klfld"]
@@ -75,21 +90,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_iqucu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sleepAnimationPlayer/sleepFact:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ev1vk"]
