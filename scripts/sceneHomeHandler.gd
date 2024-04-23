@@ -11,6 +11,20 @@ extends CanvasLayer
 @onready var stress_ui = $ColorRect/HBoxContainer/stress_level
 @onready var study_ui = $ColorRect/HBoxContainer/study_level
 @onready var calandar_ui = $ColorRect/HBoxContainer/day
+@onready var sleep_fact_scene = $sleepAnimationPlayer/sleepFact
+
+var stress_facts = [
+	"res://assets/scenes/stress facts/sleep/sleep_facts_1.png",
+	"res://assets/scenes/stress facts/sleep/sleep_facts_2.png",
+	"res://assets/scenes/stress facts/sleep/sleep_facts_3.png",
+	"res://assets/scenes/stress facts/sleep/sleep_facts_4.png",
+	"res://assets/scenes/stress facts/sleep/sleep_facts_5.png",
+	"res://assets/scenes/stress facts/sleep/sleep_facts_6.png",
+	"res://assets/scenes/stress facts/sleep/sleep_facts_7.png",
+	]
+	
+# Member variable to keep track of the last shown fact index
+var fact_index = 0
 
 # To Update the Room based on the time of the day
 func update_room_to_time():
@@ -21,7 +35,6 @@ func update_room_to_time():
 			room_sprite.texture = preload("res://assets/scenes/apartment/room_base_time_2.png")
 		GameState.TimeOfDay.NIGHT:
 			room_sprite.texture = preload("res://assets/scenes/apartment/room_base_time_3.png")
-
 #To Update the Energy
 func update_energy_display(modifier :int):
 	GameState.energy = GameState.energy + modifier
@@ -40,7 +53,6 @@ func update_energy_display(modifier :int):
 		energy_ui.texture = load("res://assets/sprites/ui/status_bars/energy/energy_level_75.png")
 	elif GameState.energy > 75:
 		energy_ui.texture = load("res://assets/sprites/ui/status_bars/energy/energy_level_100.png")
-
 #To Update the Stress
 func update_stress_display(modifier :int):
 	GameState.stress = GameState.stress + modifier
@@ -59,7 +71,6 @@ func update_stress_display(modifier :int):
 		stress_ui.texture = load("res://assets/sprites/ui/status_bars/stress/stress_level_75.png")
 	elif GameState.stress > 75:
 		stress_ui.texture = load("res://assets/sprites/ui/status_bars/stress/stress_level_100.png")
-
 #To Update the Study
 func update_study_display(modifier :int):
 	GameState.study = GameState.study + modifier
@@ -78,7 +89,6 @@ func update_study_display(modifier :int):
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_75.png")
 	elif GameState.study > 75:
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_100.png")
-
 #To Update Calandar
 func update_calandar_display(increment :int):
 	GameState.day = GameState.day + increment
@@ -148,14 +158,13 @@ func _on_bed_button_pressed():
 		#If morning, notify player that they cant sleep now
 		dispMsgToClass($Message, "I can't sleep now...", 3.0)
 	else:
-		#Fade in Animation
-		#Advance to the next day, set as morning
-		GameState.current_time_of_day == GameState.TimeOfDay.MORNING
-		update_room_to_time()
-		#Increase Energy, Decrease Stress. Advances Time
-		update_energy_display(50)
-		update_stress_display(-10)
-		update_calandar_display(1)
+		if GameState.energy>60:
+		#If morning, notify player that they cant sleep now
+			dispMsgToClass($Message, "I'm not tired...", 3.0)
+		else:
+		#Sleep Animation
+			sleepAnimationPlayer()
+
 
 #Player interact with study table
 func _on_study_button_pressed():
@@ -170,8 +179,8 @@ func _on_study_button_pressed():
 func _on_door_button_pressed():
 	if GameState.current_time_of_day == GameState.TimeOfDay.MORNING:
 		# If morning, attend class when clicked on door
-		$attendClassAnimationPlayer.play("attendClass")
 		$attendClassAnimationPlayer/sceneClassroom.visible = true
+		$attendClassAnimationPlayer.play("attendClass")
 		# Increase Stress, Study Decrease Energy
 		update_energy_display(-25)
 		update_stress_display(15)
@@ -187,3 +196,29 @@ func _on_attendClassAnimationFinished(anim_name):
 		# Change the time to Afternoon
 		GameState.current_time_of_day = GameState.TimeOfDay.AFTERNOON
 		update_room_to_time()
+
+func sleepAnimationPlayer():
+	
+	if fact_index < stress_facts.size():
+		# Load the texture for the next fact
+		var fact_texture = load(stress_facts[fact_index])
+		# Set the sprite texture to the next fact
+		sleep_fact_scene.texture = fact_texture
+		# Increment the index for the next call
+		fact_index += 1
+	
+	#Play animation
+	$sleepAnimationPlayer/sleepFact.visible = true
+	$sleepAnimationPlayer.play("sleep")
+
+func _on_sleep_animation_player_animation_finished(anim_name):
+	if anim_name == "sleep":
+		#Advance to the next day, set as morning
+		GameState.current_time_of_day = GameState.TimeOfDay.MORNING
+		update_room_to_time()
+		#Increase Energy, Decrease Stress. Advances Time
+		update_energy_display(50)
+		update_stress_display(-10)
+		update_calandar_display(1)
+		# Hide the fact sprite
+		$sleepAnimationPlayer/sleepFact.visible = false
