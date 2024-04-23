@@ -185,6 +185,8 @@ func _on_door_button_pressed():
 		update_energy_display(-25)
 		update_stress_display(15)
 		update_study_display(3)
+	elif GameState.current_time_of_day == GameState.TimeOfDay.NIGHT:
+		dispMsgToClass($Message, "It's too late to go out now...", 3.0)
 	else:
 		#Allow Player to go to the selector menu
 		get_tree().change_scene_to_file("res://scenes/sceneLocationSelectorMenu.tscn")
