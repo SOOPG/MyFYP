@@ -79,6 +79,7 @@ func update_study_display(modifier :int):
 	elif GameState.study > 75:
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_100.png")
 
+#To Update Calandar
 func update_calandar_display(increment :int):
 	GameState.day = GameState.day + increment
 		# Determine the texture to load based on the energy range
@@ -104,6 +105,7 @@ func _ready():
 	update_room_to_time()
 	update_energy_display(0)
 	update_stress_display(0)
+	update_study_display(0)
 	update_calandar_display(0)
 
 	# Connect the mouse_entered and mouse_exited signals

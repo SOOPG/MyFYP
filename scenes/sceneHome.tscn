@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://5ubmcimyc6ck"]
+[gd_scene load_steps=23 format=3 uid="uid://5ubmcimyc6ck"]
 
 [ext_resource type="Texture2D" uid="uid://dy56vkfeh8245" path="res://assets/scenes/apartment/room_base_time_1.png" id="1_4n0q8"]
 [ext_resource type="Script" path="res://scripts/sceneHomeHandler.gd" id="1_bwsg2"]
@@ -58,6 +58,43 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_lwofy"),
 "attendClass": SubResource("Animation_7c43s")
+}
+
+[sub_resource type="Animation" id="Animation_klfld"]
+resource_name = "sleep"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sleepAnimationPlayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 5, 6.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iqucu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sleepAnimationPlayer/ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ev1vk"]
+_data = {
+"RESET": SubResource("Animation_iqucu"),
+"sleep": SubResource("Animation_klfld")
 }
 
 [node name="CanvasLayer" type="CanvasLayer"]
@@ -135,6 +172,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_lyyhm")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_5j6pc")
 
 [node name="study_hover" type="Sprite2D" parent="StudyButton"]
+visible = false
 position = Vector2(156, 147)
 scale = Vector2(1.5625, 1.65625)
 texture = ExtResource("7_nfmm5")
@@ -164,6 +202,15 @@ modulate = Color(0, 0, 0, 1)
 position = Vector2(576, 324)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("10_swu7j")
+
+[node name="sleepAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ev1vk")
+}
+
+[node name="ColorRect" type="ColorRect" parent="sleepAnimationPlayer"]
+offset_right = 1152.0
+offset_bottom = 648.0
 
 [connection signal="pressed" from="BedButton" to="." method="_on_bed_button_pressed"]
 [connection signal="pressed" from="StudyButton" to="." method="_on_study_button_pressed"]
