@@ -1,19 +1,41 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpops05108jmn"]
+[gd_scene load_steps=23 format=3 uid="uid://dpops05108jmn"]
 
 [ext_resource type="Texture2D" uid="uid://4bc0nxicp3n0" path="res://assets/scenes/minigames/study/minigame_study_scene.png" id="1_r855h"]
 [ext_resource type="Script" path="res://scripts/minigameStudyHandler.gd" id="1_rpko8"]
 [ext_resource type="Texture2D" uid="uid://bgv53sj8nm8dr" path="res://assets/sprites/ui/exit_icon.png" id="3_ojo1p"]
 [ext_resource type="Texture2D" uid="uid://bvsx725e0eo2u" path="res://assets/scenes/minigames/study/study_progress/study-progress1.png" id="4_ytuog"]
-[ext_resource type="Texture2D" path="res://assets/scenes/minigames/study/distractions/phone_silent.png" id="5_cggab"]
-[ext_resource type="Texture2D" path="res://assets/scenes/minigames/study/distractions/study_distraction_silent.png" id="6_fx1e2"]
-[ext_resource type="Texture2D" path="res://assets/scenes/minigames/study/distractions/study_distraction_light_off.png" id="7_k1xee"]
-[ext_resource type="Texture2D" path="res://assets/scenes/minigames/study/distractions/study_distraction_curtain_1.png" id="8_hp5ug"]
-[ext_resource type="Texture2D" path="res://assets/scenes/minigames/study/distractions/study_distraction_ipad_notification_0.png" id="9_0bwpl"]
+[ext_resource type="Texture2D" uid="uid://3p4wuctg4nai" path="res://assets/scenes/minigames/study/distractions/phone_idle.png" id="5_1bl1l"]
+[ext_resource type="Script" path="res://scripts/DistractionHandler.gd" id="6_a47ee"]
+[ext_resource type="Texture2D" uid="uid://b7lgvyr04qrqg" path="res://assets/scenes/minigames/study/distractions/phone_distraction.png" id="7_7cymh"]
+[ext_resource type="Texture2D" uid="uid://cw8oug65g44w0" path="res://assets/scenes/minigames/study/distractions/watch_idle.png" id="7_ie4mk"]
+[ext_resource type="Texture2D" uid="uid://26e0n3but16y" path="res://assets/scenes/minigames/study/distractions/lamp_idle.png" id="8_3s04i"]
+[ext_resource type="Texture2D" uid="uid://c1ii22tc20bam" path="res://assets/scenes/minigames/study/distractions/watch_distraction.png" id="9_putjp"]
+[ext_resource type="Texture2D" uid="uid://cj0nk4jm4kmyr" path="res://assets/scenes/minigames/study/distractions/cutrain_idle.png" id="9_rixqa"]
+[ext_resource type="Texture2D" uid="uid://bo4of27c6bcfp" path="res://assets/scenes/minigames/study/distractions/ipad_idle.png" id="10_pjcfb"]
+[ext_resource type="Texture2D" uid="uid://cl04v220d2tn7" path="res://assets/scenes/minigames/study/distractions/lamp_distraction.png" id="11_om2bl"]
+[ext_resource type="Texture2D" uid="uid://ca62tcqpgimg0" path="res://assets/scenes/minigames/study/distractions/curtain_distraction.png" id="13_1tshr"]
+[ext_resource type="Texture2D" uid="uid://bs47blcin2a58" path="res://assets/scenes/minigames/study/distractions/ipad_distraction.png" id="15_ro27s"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cy16k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_weknr"]
 size = Vector2(125.556, 102.222)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srab1"]
+size = Vector2(28.8968, 56.2267)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rtuaq"]
+size = Vector2(20.7835, 36.507)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e3asu"]
+radius = 64.4577
+height = 169.208
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md4lh"]
+size = Vector2(320.549, 70.6888)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0q6nt"]
+size = Vector2(90.2812, 129.679)
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_rpko8")
@@ -63,26 +85,72 @@ shape = SubResource("RectangleShape2D_weknr")
 [node name="Phone" type="Sprite2D" parent="study"]
 position = Vector2(-101.111, 106.111)
 scale = Vector2(1.34579, 1.2252)
-texture = ExtResource("5_cggab")
+texture = ExtResource("5_1bl1l")
+
+[node name="PhoneArea" type="Area2D" parent="study/Phone"]
+script = ExtResource("6_a47ee")
+idle_texture = ExtResource("5_1bl1l")
+distraction_texture = ExtResource("7_7cymh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="study/Phone/PhoneArea"]
+shape = SubResource("RectangleShape2D_srab1")
 
 [node name="Watch" type="Sprite2D" parent="study"]
 position = Vector2(-5, 5.55554)
 scale = Vector2(1.28307, 1.09568)
-texture = ExtResource("6_fx1e2")
+texture = ExtResource("7_ie4mk")
+
+[node name="WatchArea" type="Area2D" parent="study/Watch"]
+script = ExtResource("6_a47ee")
+idle_texture = ExtResource("7_ie4mk")
+distraction_texture = ExtResource("9_putjp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="study/Watch/WatchArea"]
+position = Vector2(0, 1.52588e-05)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_rtuaq")
 
 [node name="Lamp" type="Sprite2D" parent="study"]
 position = Vector2(-162.778, 66.6666)
 scale = Vector2(0.973937, 0.978415)
-texture = ExtResource("7_k1xee")
+texture = ExtResource("8_3s04i")
+
+[node name="LampArea" type="Area2D" parent="study/Lamp"]
+script = ExtResource("6_a47ee")
+idle_texture = ExtResource("8_3s04i")
+distraction_texture = ExtResource("11_om2bl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="study/Lamp/LampArea"]
+position = Vector2(-27.9507, -2.27121)
+shape = SubResource("CapsuleShape2D_e3asu")
 
 [node name="Curtain" type="Sprite2D" parent="study"]
 position = Vector2(-158.056, -146.806)
 scale = Vector2(1.01215, 0.94288)
-texture = ExtResource("8_hp5ug")
+texture = ExtResource("9_rixqa")
+
+[node name="CurtainArea" type="Area2D" parent="study/Curtain"]
+script = ExtResource("6_a47ee")
+idle_texture = ExtResource("9_rixqa")
+distraction_texture = ExtResource("13_1tshr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="study/Curtain/CurtainArea"]
+position = Vector2(0.274399, 0.155621)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_md4lh")
 
 [node name="Ipad" type="Sprite2D" parent="study"]
 position = Vector2(138.333, 78.8889)
 scale = Vector2(0.966117, 0.865384)
-texture = ExtResource("9_0bwpl")
+texture = ExtResource("10_pjcfb")
+
+[node name="IpadArea" type="Area2D" parent="study/Ipad"]
+script = ExtResource("6_a47ee")
+idle_texture = ExtResource("10_pjcfb")
+distraction_texture = ExtResource("15_ro27s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="study/Ipad/IpadArea"]
+position = Vector2(0.287506, 6.10352e-05)
+shape = SubResource("RectangleShape2D_0q6nt")
 
 [connection signal="pressed" from="study/exit_icon/exitButton" to="." method="_on_exit_button_pressed"]

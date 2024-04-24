@@ -27,31 +27,6 @@ var study_progress = [
 	"res://assets/scenes/minigames/study/study_progress/study-progress13.png",
 	]
 
-var phone_textures = [
-	"res://assets/scenes/minigames/study/distractions/phone_idle.png",
-	"res://assets/scenes/minigames/study/distractions/phone_distraction.png"
-]
-
-var watch_textures = [
-	"res://assets/scenes/minigames/study/distractions/watch_idle.png",
-	"res://assets/scenes/minigames/study/distractions/watch_distraction.png"
-]
-
-var lamp_textures = [
-	"res://assets/scenes/minigames/study/distractions/lamp_idle.png",
-	"res://assets/scenes/minigames/study/distractions/lamp_distraction.png"
-]
-
-var curtain_textures = [
-	"res://assets/scenes/minigames/study/distractions/cutrain_idle.png",
-	"res://assets/scenes/minigames/study/distractions/curtain_distraction.png"
-]
-
-var ipad_textures = [
-	"res://assets/scenes/minigames/study/distractions/ipad_idle.png",
-	"res://assets/scenes/minigames/study/distractions/ipad_distraction.png"
-]
-
 # For player study and book texture changes
 const TOTAL_STUDY_TIME = 20.0
 var NUM_PROGRESS_STEPS = 7
@@ -64,13 +39,6 @@ var distraction_timer = Timer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	#Load Distraction Textures
-	phone_sprite.texture = load(phone_textures[0])
-	watch_sprite.texture = load(watch_textures[0])
-	lamp_sprite.texture = load(lamp_textures[0])
-	curtain_sprite.texture = load(curtain_textures[0])
-	ipad_sprite.texture = load(ipad_textures[0])
 	
 	book_area.input_event.connect(self._on_book_area_input_event)
 	start_minigame_timer()
