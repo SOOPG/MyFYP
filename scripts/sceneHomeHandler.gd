@@ -170,12 +170,17 @@ func _on_bed_button_pressed():
 		#Sleep Animation
 			sleepAnimationPlayer()
 
-
 #Player interact with study table
 func _on_study_button_pressed():
 	if GameState.current_time_of_day == GameState.TimeOfDay.MORNING:
 		#If morning, notify player that they have to attend class
-		dispMsgToClass($Message, "I need to attend class first....", 3.0)
+		dispMsgToClass($Message, "I need to attend class first...", 3.0)
+	elif GameState.energy <40:
+			#If too tired, notify player
+		dispMsgToClass($Message, "I'm too tired...", 3.0)
+	elif GameState.stress > 50:
+			#If too stress, notify player
+		dispMsgToClass($Message, "I'm too stress out...", 3.0)
 	else:
 		#Go to the study scene
 		get_tree().change_scene_to_file("res://scenes/sceneStudyMinigame.tscn")

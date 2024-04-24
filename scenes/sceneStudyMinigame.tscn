@@ -1,10 +1,86 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpops05108jmn"]
+[gd_scene load_steps=12 format=3 uid="uid://dpops05108jmn"]
 
 [ext_resource type="Texture2D" uid="uid://4bc0nxicp3n0" path="res://assets/scenes/minigames/study/minigame_study_scene.png" id="1_r855h"]
+[ext_resource type="Script" path="res://scripts/minigameStudyHandler.gd" id="1_rpko8"]
+[ext_resource type="Texture2D" uid="uid://bgv53sj8nm8dr" path="res://assets/sprites/ui/exit_icon.png" id="3_ojo1p"]
+[ext_resource type="Texture2D" uid="uid://bvsx725e0eo2u" path="res://assets/scenes/minigames/study/study_progress/study-progress1.png" id="4_ytuog"]
+[ext_resource type="Texture2D" uid="uid://dt2k703jefvyp" path="res://assets/scenes/minigames/study/distractions/phone_silent.png" id="5_cggab"]
+[ext_resource type="Texture2D" uid="uid://fw2jacvsmenn" path="res://assets/scenes/minigames/study/distractions/study_distraction_silent.png" id="6_fx1e2"]
+[ext_resource type="Texture2D" uid="uid://ble7b1sshyfsg" path="res://assets/scenes/minigames/study/distractions/study_distraction_light_off.png" id="7_k1xee"]
+[ext_resource type="Texture2D" uid="uid://bexie1oksd0hy" path="res://assets/scenes/minigames/study/distractions/study_distraction_curtain_1.png" id="8_hp5ug"]
+[ext_resource type="Texture2D" uid="uid://bh22ik3r0avol" path="res://assets/scenes/minigames/study/distractions/study_distraction_ipad_notification_0.png" id="9_0bwpl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cy16k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_weknr"]
+size = Vector2(125.556, 102.222)
 
 [node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_rpko8")
 
 [node name="study" type="Sprite2D" parent="."]
 position = Vector2(576, 324)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("1_r855h")
+
+[node name="exit_icon" type="Sprite2D" parent="study"]
+position = Vector2(269.042, 137.736)
+scale = Vector2(0.742, 0.739)
+texture = ExtResource("3_ojo1p")
+
+[node name="exitButton" type="Button" parent="study/exit_icon"]
+offset_left = -44.0
+offset_top = -46.0
+offset_right = 45.0
+offset_bottom = 45.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cy16k")
+
+[node name="minigameTimer" type="Timer" parent="study"]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="timerLabel" type="Label" parent="study"]
+offset_left = 245.0
+offset_top = 25.0
+offset_right = 291.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "60"
+horizontal_alignment = 1
+
+[node name="Book" type="Sprite2D" parent="study"]
+position = Vector2(8.88889, 108.889)
+texture = ExtResource("4_ytuog")
+
+[node name="BookArea" type="Area2D" parent="study/Book"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="study/Book/BookArea"]
+position = Vector2(-0.555573, 0)
+shape = SubResource("RectangleShape2D_weknr")
+
+[node name="Phone" type="Sprite2D" parent="."]
+position = Vector2(394, 515)
+scale = Vector2(2.42241, 2.20536)
+texture = ExtResource("5_cggab")
+
+[node name="Watch" type="Sprite2D" parent="."]
+position = Vector2(567, 334)
+scale = Vector2(2.30952, 1.97222)
+texture = ExtResource("6_fx1e2")
+
+[node name="Lamp" type="Sprite2D" parent="."]
+position = Vector2(283, 444)
+scale = Vector2(1.75309, 1.76115)
+texture = ExtResource("7_k1xee")
+
+[node name="Curtain" type="Sprite2D" parent="."]
+position = Vector2(291.5, 59.75)
+scale = Vector2(1.82188, 1.69718)
+texture = ExtResource("8_hp5ug")
+
+[node name="Ipad" type="Sprite2D" parent="."]
+position = Vector2(825, 466)
+scale = Vector2(1.73901, 1.55769)
+texture = ExtResource("9_0bwpl")

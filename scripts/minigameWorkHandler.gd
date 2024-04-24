@@ -54,6 +54,10 @@ var work_facts = [
 
 var time_left = 20
 var correctOrder = 0
+
+# Stop timer based on condition, 
+#if player win: stop timer, then go to win animation
+#if player lose by timer: stop timer the go to lose animation
 var win = false
 
 # Initialize with an invalid index
@@ -109,7 +113,9 @@ func _on_grocer_button_pressed(button_index):
 			timer.stop()
 			# Set player has done job
 			GameState.playerHasDoneJob=true
+			# Player Energy Reduced while Stress Increased
 			GameState.modify_player_stats(-40,35,0)
+			# Player Earns Money
 			GameState.modify_player_money(35)
 			GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
 			# Win minigame, show the work facts
@@ -154,13 +160,6 @@ func _process(delta):
 func _on_exit_button_pressed():
 	# Apply penalty to player
 	# Display minigame fail scene
-	# Set player has done job
-	GameState.playerHasDoneJob=true
-	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
-
-func _on_minigame_timer_timeout():
-	# Apply penalty to player
-	# On time out, display minigame fail scene
 	# Set player has done job
 	GameState.playerHasDoneJob=true
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
