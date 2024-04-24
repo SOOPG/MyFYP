@@ -84,3 +84,5 @@ texture = ExtResource("8_hp5ug")
 position = Vector2(825, 466)
 scale = Vector2(1.73901, 1.55769)
 texture = ExtResource("9_0bwpl")
+
+[connection signal="pressed" from="study/exit_icon/exitButton" to="." method="_on_exit_button_pressed"]
