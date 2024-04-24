@@ -34,6 +34,9 @@ func _on_work_button_pressed():
 	elif GameState.energy < 30:
 		#Show a text to player too tired
 		dispMsgToClass($statCheckerMsg, "I'm too tired...", 3.0)
+	elif GameState.stress > 60:
+		#Show a text to player too tired
+		dispMsgToClass($statCheckerMsg, "I'm too stress...", 3.0)	
 	else:
 		get_tree().change_scene_to_file("res://scenes/sceneWorkMinigame.tscn")
 

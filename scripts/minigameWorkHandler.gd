@@ -95,7 +95,8 @@ func _on_grocer_button_pressed(button_index):
 			# Win minigame, show the work facts
 			
 			# Modify Player Stats
-			GameState.modify_player_stats(-40,50,0)
+			GameState.modify_player_stats(-40,35,0)
+			GameState.modify_player_money(35)
 			# Set player has done job
 			GameState.playerHasDoneJob=true
 			GameState.current_time_of_day=GameState.TimeOfDay.NIGHT

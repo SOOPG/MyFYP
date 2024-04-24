@@ -11,6 +11,7 @@ extends CanvasLayer
 @onready var stress_ui = $ColorRect/HBoxContainer/stress_level
 @onready var study_ui = $ColorRect/HBoxContainer/study_level
 @onready var calandar_ui = $ColorRect/HBoxContainer/day
+@onready var money_ui = $ColorRect/Money
 @onready var sleep_fact_scene = $sleepAnimationPlayer/sleepFact
 
 var stress_facts = [
@@ -89,7 +90,7 @@ func update_study_display(modifier :int):
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_75.png")
 	elif GameState.study > 75:
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_100.png")
-#To Update Calandar
+#To Update the Calandar
 func update_calandar_display(increment :int):
 	GameState.day = GameState.day + increment
 		# Determine the texture to load based on the energy range
@@ -108,6 +109,9 @@ func update_calandar_display(increment :int):
 			calandar_ui.texture=load("res://assets/sprites/ui/status_bars/calendar/day_6.png")
 		7:
 			calandar_ui.texture=load("res://assets/sprites/ui/status_bars/calendar/day_7.png")
+#To Update the Money
+func update_money_display():
+	money_ui.text = str(GameState.money)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -117,6 +121,7 @@ func _ready():
 	update_stress_display(0)
 	update_study_display(0)
 	update_calandar_display(0)
+	update_money_display()
 
 	# Connect the mouse_entered and mouse_exited signals
 	bed_button.mouse_entered.connect(self._on_bed_mouse_entered)
@@ -224,5 +229,8 @@ func _on_sleep_animation_player_animation_finished(anim_name):
 		update_energy_display(50)
 		update_stress_display(-10)
 		update_calandar_display(1)
+		#Pay Rent
+		GameState.pay_rental(-25)
+		update_money_display()
 		# Hide the fact sprite
 		$sleepAnimationPlayer/sleepFact.visible = false
