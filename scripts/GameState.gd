@@ -28,7 +28,7 @@ var work_fact_index = 0
 func modify_player_stats(energyModifer,stressModifer,studyModifer):
 	energy = energy + energyModifer
 	stress = stress + stressModifer
-	study += study + studyModifer
+	study = study + studyModifer
 	
 	energy = clamp(energy, 0, 100)
 	stress = clamp(stress, 0, 100)

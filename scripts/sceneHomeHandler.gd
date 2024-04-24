@@ -39,10 +39,6 @@ func update_room_to_time():
 #To Update the Energy
 func update_energy_display(modifier :int):
 	GameState.energy = GameState.energy + modifier
-	if GameState.energy < 0:
-		GameState.energy = 0
-	if	GameState.energy > 100:
-		GameState.energy = 100
 	# Determine the texture to load based on the energy range
 	if GameState.energy == 0:
 		energy_ui.texture = load("res://assets/sprites/ui/status_bars/energy/energy_level_0.png")
@@ -57,10 +53,6 @@ func update_energy_display(modifier :int):
 #To Update the Stress
 func update_stress_display(modifier :int):
 	GameState.stress = GameState.stress + modifier
-	if GameState.stress < 0:
-		GameState.stress = 0
-	if	GameState.stress > 100:
-		GameState.stress = 100
 	# Determine the texture to load based on the energy range
 	if GameState.stress == 0:
 		stress_ui.texture = load("res://assets/sprites/ui/status_bars/stress/stress_level_0.png")
@@ -75,10 +67,6 @@ func update_stress_display(modifier :int):
 #To Update the Study
 func update_study_display(modifier :int):
 	GameState.study = GameState.study + modifier
-	if GameState.study < 0:
-		GameState.study = 0
-	if	GameState.study > 100:
-		GameState.study = 100
 	# Determine the texture to load based on the energy range
 	if GameState.study == 0:
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_0.png")
@@ -181,6 +169,9 @@ func _on_study_button_pressed():
 	elif GameState.stress > 50:
 			#If too stress, notify player
 		dispMsgToClass($Message, "I'm too stress out...", 3.0)
+	elif GameState.playerHasDoneStudy == true:
+		#If already stress, notify player
+		dispMsgToClass($Message, "I already studied for today...", 3.0)
 	else:
 		#Go to the study scene
 		get_tree().change_scene_to_file("res://scenes/sceneStudyMinigame.tscn")

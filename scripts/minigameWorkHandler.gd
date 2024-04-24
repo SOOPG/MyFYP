@@ -111,14 +111,6 @@ func _on_grocer_button_pressed(button_index):
 		else:
 			win = true
 			timer.stop()
-			# Set player has done job
-			GameState.playerHasDoneJob=true
-			# Player Energy Reduced while Stress Increased
-			GameState.modify_player_stats(-40,35,0)
-			# Player Earns Money
-			GameState.modify_player_money(35)
-			GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
-			# Win minigame, show the work facts
 			play_win_animation()
 
 func play_win_animation():
@@ -167,4 +159,12 @@ func _on_exit_button_pressed():
 func _on_win_animation_player_animation_finished(anim_name):
 	if anim_name == "minigameWin":
 		GameState.work_fact_index+=1
+		# Set player has done job
+		GameState.playerHasDoneJob=true
+		# Player Energy Reduced while Stress Increased
+		GameState.modify_player_stats(-40,35,0)
+		# Player Earns Money
+		GameState.modify_player_money(35)
+		GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
+		# Win minigame, show the work facts
 		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")

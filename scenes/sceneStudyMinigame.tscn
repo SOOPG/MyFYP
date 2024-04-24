@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dpops05108jmn"]
+[gd_scene load_steps=27 format=3 uid="uid://dpops05108jmn"]
 
 [ext_resource type="Texture2D" uid="uid://4bc0nxicp3n0" path="res://assets/scenes/minigames/study/minigame_study_scene.png" id="1_r855h"]
 [ext_resource type="Script" path="res://scripts/minigameStudyHandler.gd" id="1_rpko8"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cl04v220d2tn7" path="res://assets/scenes/minigames/study/distractions/lamp_distraction.png" id="11_om2bl"]
 [ext_resource type="Texture2D" uid="uid://ca62tcqpgimg0" path="res://assets/scenes/minigames/study/distractions/curtain_distraction.png" id="13_1tshr"]
 [ext_resource type="Texture2D" uid="uid://bs47blcin2a58" path="res://assets/scenes/minigames/study/distractions/ipad_distraction.png" id="15_ro27s"]
+[ext_resource type="Texture2D" uid="uid://dm5cik6r7k576" path="res://assets/scenes/stress facts/study/study_facts_1.png" id="16_0kwdg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cy16k"]
 
@@ -36,6 +37,43 @@ size = Vector2(320.549, 70.6888)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0q6nt"]
 size = Vector2(90.2812, 129.679)
+
+[sub_resource type="Animation" id="Animation_dm4ro"]
+resource_name = "minigameWin"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("winAnimationPlayer/studyFacts:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0nsqk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("winAnimationPlayer/studyFacts:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lqqc5"]
+_data = {
+"RESET": SubResource("Animation_0nsqk"),
+"minigameWin": SubResource("Animation_dm4ro")
+}
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_rpko8")
@@ -153,4 +191,16 @@ distraction_texture = ExtResource("15_ro27s")
 position = Vector2(0.287506, 6.10352e-05)
 shape = SubResource("RectangleShape2D_0q6nt")
 
+[node name="winAnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lqqc5")
+}
+
+[node name="studyFacts" type="Sprite2D" parent="winAnimationPlayer"]
+visible = false
+position = Vector2(575.75, 324.375)
+scale = Vector2(0.60026, 0.601157)
+texture = ExtResource("16_0kwdg")
+
 [connection signal="pressed" from="study/exit_icon/exitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="animation_finished" from="winAnimationPlayer" to="." method="_on_win_animation_player_animation_finished"]

@@ -5,11 +5,12 @@ extends CanvasLayer
 @onready var timer_label = $study/timerLabel
 @onready var book_area= $study/Book/BookArea
 @onready var book_sprite= $study/Book
-@onready var phone_sprite= $study/Phone
-@onready var watch_sprite= $study/Watch
-@onready var lamp_sprite= $study/Lamp
-@onready var curtain_sprite= $study/Curtain
-@onready var ipad_sprite= $study/Ipad
+@onready var phone_distraction= $study/Phone/PhoneArea
+@onready var watch_distraction= $study/Watch/WatchArea
+@onready var lamp_distraction= $study/Lamp/LampArea
+@onready var curtain_distraction= $study/Curtain/CurtainArea
+@onready var ipad_distraction= $study/Ipad/IpadArea
+@onready var study_fact_scene= $winAnimationPlayer/studyFacts
 
 var study_progress = [
 	"res://assets/scenes/minigames/study/study_progress/study-progress1.png",
@@ -26,6 +27,16 @@ var study_progress = [
 	"res://assets/scenes/minigames/study/study_progress/study-progress12.png",
 	"res://assets/scenes/minigames/study/study_progress/study-progress13.png",
 	]
+	
+var study_facts = [
+	"res://assets/scenes/stress facts/study/study_facts_1.png",
+	"res://assets/scenes/stress facts/study/study_facts_2.png",
+	"res://assets/scenes/stress facts/study/study_facts_3.png",
+	"res://assets/scenes/stress facts/study/study_facts_4.png",
+	"res://assets/scenes/stress facts/study/study_facts_5.png",
+	"res://assets/scenes/stress facts/study/study_facts_6.png",
+	"res://assets/scenes/stress facts/study/study_facts_7.png",
+]
 
 # For player study and book texture changes
 const TOTAL_STUDY_TIME = 20.0
@@ -37,16 +48,46 @@ var holding_down = false
 var total_study_time = 0.0
 var distraction_timer = Timer.new()
 
+# Track active distractions
+var active_distractions = 0  
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
 	book_area.input_event.connect(self._on_book_area_input_event)
 	start_minigame_timer()
+	
+	# Connect the distraction signals
+	phone_distraction.distraction_started.connect(self._on_distraction_started)
+	phone_distraction.distraction_cleared.connect(self._on_distraction_cleared)
+
+	watch_distraction.distraction_started.connect(self._on_distraction_started)
+	watch_distraction.distraction_cleared.connect(self._on_distraction_cleared)
+
+	lamp_distraction.distraction_started.connect(self._on_distraction_started)
+	lamp_distraction.distraction_cleared.connect(self._on_distraction_cleared)
+
+	curtain_distraction.distraction_started.connect(self._on_distraction_started)
+	curtain_distraction.distraction_cleared.connect(self._on_distraction_cleared)
+
+	ipad_distraction.distraction_started.connect(self._on_distraction_started)
+	ipad_distraction.distraction_cleared.connect(self._on_distraction_cleared)
 
 func _on_book_area_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		# Set holding_down to true if the mouse button is pressed
-		holding_down = event.pressed  
+		# Only set holding_down to true if there are no active distractions
+		holding_down = event.pressed and active_distractions == 0
+		
+
+func _on_distraction_started(distraction_name):
+	active_distractions += 1
+	if active_distractions > 0:
+		holding_down = false
+
+func _on_distraction_cleared(distraction_name):
+	active_distractions -= 1
+
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -54,17 +95,19 @@ func _process(delta):
 		_on_exit_button_pressed()
 		return
 		
-	# If the player is holding down the left click on the area
-	if holding_down and total_study_time != 20:
+	# If no distraction
+	if holding_down and active_distractions == 0:
 		# Add the delta(1s) to total study time
 		total_study_time += delta  
 		# Update the texture based on the study time
 		update_study_progress_texture(total_study_time)  
-		
-		#If player has hold the specified time
+			
+		#If player has hold the targetted time
 		if total_study_time >= TOTAL_STUDY_TIME:
 			studying_complete()
-
+	else:
+		# Ensure holding down is false if there are distractions
+			holding_down = false
 	# Update the timer label text every frame with the remaining time
 	time_left = int(timer.time_left)
 	timer_label.text = str(time_left)
@@ -85,8 +128,8 @@ func update_study_progress_texture(study_time):
 func studying_complete():
 	win = true
 	timer.stop()  # Stop the timer
-	# Add any additional logic for winning here
-	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+	play_win_animation()
+
 
 func start_minigame_timer():
 	#Starts Minigame Timer
@@ -100,3 +143,23 @@ func _on_exit_button_pressed():
 	# Set player has done study
 	GameState.playerHasDoneStudy=true
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+
+func play_win_animation():
+	if GameState.study_fact_index < study_facts.size():	
+		# Load the texture for the next fact
+		var fact_texture = load(study_facts[GameState.study_fact_index])
+		# Set the sprite texture to the next fact
+		study_fact_scene.texture = fact_texture
+	# Play the animation
+	$winAnimationPlayer/studyFacts.visible = true
+	$winAnimationPlayer.play("minigameWin")
+
+func _on_win_animation_player_animation_finished(anim_name):
+	if anim_name == "minigameWin":
+		GameState.work_fact_index+=1
+		GameState.playerHasDoneJob=true
+	# Decrease Energy, Increase Stress, Increase Study
+	GameState.modify_player_stats(-30,35,16)
+	if GameState.current_time_of_day==GameState.TimeOfDay.AFTERNOON:
+		GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
+		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
