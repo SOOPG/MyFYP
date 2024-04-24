@@ -23,15 +23,19 @@ func _on_hangout_button_pressed():
 	if GameState.playerHasDoneHangout == true:
 		dispMsgToClass($statCheckerMsg, "I've done hangout already...", 3.0)
 	elif GameState.energy < 30:
-		#Show a text to saw I've already hangout today....
+		#Show a text to player too tired
 		dispMsgToClass($statCheckerMsg, "I'm too tired...", 3.0)
 	else:
 		get_tree().change_scene_to_file("res://scenes/sceneLocationHangout.tscn")
 
-
 func _on_work_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/sceneWorkMinigame.tscn")
-
+	if GameState.playerHasDoneJob == true:
+		dispMsgToClass($statCheckerMsg, "I've done my job already...", 3.0)
+	elif GameState.energy < 30:
+		#Show a text to player too tired
+		dispMsgToClass($statCheckerMsg, "I'm too tired...", 3.0)
+	else:
+		get_tree().change_scene_to_file("res://scenes/sceneWorkMinigame.tscn")
 
 func _on_home_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")

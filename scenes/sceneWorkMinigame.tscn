@@ -1,8 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://cer8nxmw5f5wj"]
+[gd_scene load_steps=15 format=3 uid="uid://cer8nxmw5f5wj"]
 
 [ext_resource type="Texture2D" uid="uid://c2jimydvnjj6y" path="res://assets/scenes/minigames/work/work_scene.png" id="1_4qjdk"]
 [ext_resource type="Script" path="res://scripts/minigameWorkHandler.gd" id="1_an0le"]
 [ext_resource type="Texture2D" uid="uid://bgv53sj8nm8dr" path="res://assets/sprites/ui/exit_icon.png" id="3_hn76j"]
+[ext_resource type="Texture2D" uid="uid://dd5v3g6p32wct" path="res://assets/scenes/minigames/work/grocery/grocer_1.png" id="4_5oac3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hns0r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hqk82"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3dg0r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fpn17"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7rwhj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f001p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_usgbg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rpu2w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hfytr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_keip5"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_an0le")
@@ -12,15 +33,101 @@ position = Vector2(576, 324)
 scale = Vector2(1.8, 1.8)
 texture = ExtResource("1_4qjdk")
 
-[node name="exitButton" type="Button" parent="work"]
-offset_left = 236.111
-offset_top = 103.889
-offset_right = 303.111
-offset_bottom = 170.889
-
-[node name="exit_icon" type="Sprite2D" parent="work/exitButton"]
-position = Vector2(32.9306, 33.8472)
+[node name="exit_icon" type="Sprite2D" parent="work"]
+position = Vector2(269.042, 137.736)
 scale = Vector2(0.742284, 0.739198)
 texture = ExtResource("3_hn76j")
 
-[connection signal="pressed" from="work/exitButton" to="." method="_on_exit_button_pressed"]
+[node name="exitButton" type="Button" parent="work/exit_icon"]
+offset_left = -44.0
+offset_top = -46.0
+offset_right = 45.0
+offset_bottom = 45.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hns0r")
+
+[node name="minigameTimer" type="Timer" parent="work"]
+wait_time = 20.0
+one_shot = true
+autostart = true
+
+[node name="timerLabel" type="Label" parent="work"]
+offset_left = 247.0
+offset_top = -164.0
+offset_right = 283.0
+offset_bottom = -122.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "20"
+
+[node name="grocerOrder" type="Sprite2D" parent="work"]
+position = Vector2(218.333, 26.1111)
+scale = Vector2(1.76543, 1.61111)
+texture = ExtResource("4_5oac3")
+
+[node name="grocer1Button" type="Button" parent="work"]
+offset_left = -273.0
+offset_top = 51.0
+offset_right = -241.0
+offset_bottom = 99.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hqk82")
+
+[node name="grocer2Button" type="Button" parent="work"]
+offset_left = -227.0
+offset_top = -91.0
+offset_right = -204.0
+offset_bottom = -46.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3dg0r")
+
+[node name="grocer3Button" type="Button" parent="work"]
+offset_left = -226.0
+offset_top = -18.0
+offset_right = -208.0
+offset_bottom = 26.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fpn17")
+
+[node name="grocer4Button" type="Button" parent="work"]
+offset_left = -154.0
+offset_top = 128.0
+offset_right = -126.0
+offset_bottom = 152.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7rwhj")
+
+[node name="grocer5Button" type="Button" parent="work"]
+offset_left = -187.0
+offset_top = 53.0
+offset_right = -151.0
+offset_bottom = 103.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_f001p")
+
+[node name="grocer6Button" type="Button" parent="work"]
+offset_left = -145.0
+offset_top = -22.0
+offset_right = -129.0
+offset_bottom = 28.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_usgbg")
+
+[node name="grocer7Button" type="Button" parent="work"]
+offset_left = -241.0
+offset_top = 63.0
+offset_right = -215.0
+offset_bottom = 102.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rpu2w")
+
+[node name="grocer8Button" type="Button" parent="work"]
+offset_left = -100.0
+offset_top = 131.0
+offset_right = -89.0
+offset_bottom = 153.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hfytr")
+
+[node name="grocer9Button" type="Button" parent="work"]
+offset_left = -167.0
+offset_top = -86.0
+offset_right = -135.0
+offset_bottom = -46.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_keip5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="pressed" from="work/exit_icon/exitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="timeout" from="work/minigameTimer" to="." method="_on_minigame_timer_timeout"]
