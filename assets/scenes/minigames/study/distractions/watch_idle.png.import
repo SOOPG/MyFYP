@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ble7b1sshyfsg"
-path="res://.godot/imported/study_distraction_light_off.png-78ba430aac26c292d8ba09a169b365e7.ctex"
+uid="uid://cw8oug65g44w0"
+path="res://.godot/imported/watch_idle.png-fbe17de0bd3ab1357bc96aa18c67cb7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/scenes/minigames/study/distractions/study_distraction_light_off.png"
-dest_files=["res://.godot/imported/study_distraction_light_off.png-78ba430aac26c292d8ba09a169b365e7.ctex"]
+source_file="res://assets/scenes/minigames/study/distractions/watch_idle.png"
+dest_files=["res://.godot/imported/watch_idle.png-fbe17de0bd3ab1357bc96aa18c67cb7a.ctex"]
 
 [params]
 

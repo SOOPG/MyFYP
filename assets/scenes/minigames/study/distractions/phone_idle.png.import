@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7kunt25v44uw"
-path="res://.godot/imported/study_distraction_ipad_notification_4.png-7437c3fa0d52299805f12ea4c0cdcead.ctex"
+uid="uid://3p4wuctg4nai"
+path="res://.godot/imported/phone_idle.png-7716cf8f3f09c929a0833afa4c1ebeeb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/scenes/minigames/study/distractions/study_distraction_ipad_notification_4.png"
-dest_files=["res://.godot/imported/study_distraction_ipad_notification_4.png-7437c3fa0d52299805f12ea4c0cdcead.ctex"]
+source_file="res://assets/scenes/minigames/study/distractions/phone_idle.png"
+dest_files=["res://.godot/imported/phone_idle.png-7716cf8f3f09c929a0833afa4c1ebeeb.ctex"]
 
 [params]
 

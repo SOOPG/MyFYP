@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt2k703jefvyp"
-path="res://.godot/imported/phone_silent.png-bba82d04969a40e99be4f71299f4589d.ctex"
+uid="uid://cj0nk4jm4kmyr"
+path="res://.godot/imported/cutrain_idle.png-ba6173f1b25a7a5bd9a67d354a5db347.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/scenes/minigames/study/distractions/phone_silent.png"
-dest_files=["res://.godot/imported/phone_silent.png-bba82d04969a40e99be4f71299f4589d.ctex"]
+source_file="res://assets/scenes/minigames/study/distractions/cutrain_idle.png"
+dest_files=["res://.godot/imported/cutrain_idle.png-ba6173f1b25a7a5bd9a67d354a5db347.ctex"]
 
 [params]
 

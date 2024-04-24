@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://scripts/minigameStudyHandler.gd" id="1_rpko8"]
 [ext_resource type="Texture2D" uid="uid://bgv53sj8nm8dr" path="res://assets/sprites/ui/exit_icon.png" id="3_ojo1p"]
 [ext_resource type="Texture2D" uid="uid://bvsx725e0eo2u" path="res://assets/scenes/minigames/study/study_progress/study-progress1.png" id="4_ytuog"]
-[ext_resource type="Texture2D" uid="uid://dt2k703jefvyp" path="res://assets/scenes/minigames/study/distractions/phone_silent.png" id="5_cggab"]
-[ext_resource type="Texture2D" uid="uid://fw2jacvsmenn" path="res://assets/scenes/minigames/study/distractions/study_distraction_silent.png" id="6_fx1e2"]
-[ext_resource type="Texture2D" uid="uid://ble7b1sshyfsg" path="res://assets/scenes/minigames/study/distractions/study_distraction_light_off.png" id="7_k1xee"]
-[ext_resource type="Texture2D" uid="uid://bexie1oksd0hy" path="res://assets/scenes/minigames/study/distractions/study_distraction_curtain_1.png" id="8_hp5ug"]
-[ext_resource type="Texture2D" uid="uid://bh22ik3r0avol" path="res://assets/scenes/minigames/study/distractions/study_distraction_ipad_notification_0.png" id="9_0bwpl"]
+[ext_resource type="Texture2D" path="res://assets/scenes/minigames/study/distractions/phone_silent.png" id="5_cggab"]
+[ext_resource type="Texture2D" path="res://assets/scenes/minigames/study/distractions/study_distraction_silent.png" id="6_fx1e2"]
+[ext_resource type="Texture2D" path="res://assets/scenes/minigames/study/distractions/study_distraction_light_off.png" id="7_k1xee"]
+[ext_resource type="Texture2D" path="res://assets/scenes/minigames/study/distractions/study_distraction_curtain_1.png" id="8_hp5ug"]
+[ext_resource type="Texture2D" path="res://assets/scenes/minigames/study/distractions/study_distraction_ipad_notification_0.png" id="9_0bwpl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cy16k"]
 
@@ -60,29 +60,29 @@ texture = ExtResource("4_ytuog")
 position = Vector2(-0.555573, 0)
 shape = SubResource("RectangleShape2D_weknr")
 
-[node name="Phone" type="Sprite2D" parent="."]
-position = Vector2(394, 515)
-scale = Vector2(2.42241, 2.20536)
+[node name="Phone" type="Sprite2D" parent="study"]
+position = Vector2(-101.111, 106.111)
+scale = Vector2(1.34579, 1.2252)
 texture = ExtResource("5_cggab")
 
-[node name="Watch" type="Sprite2D" parent="."]
-position = Vector2(567, 334)
-scale = Vector2(2.30952, 1.97222)
+[node name="Watch" type="Sprite2D" parent="study"]
+position = Vector2(-5, 5.55554)
+scale = Vector2(1.28307, 1.09568)
 texture = ExtResource("6_fx1e2")
 
-[node name="Lamp" type="Sprite2D" parent="."]
-position = Vector2(283, 444)
-scale = Vector2(1.75309, 1.76115)
+[node name="Lamp" type="Sprite2D" parent="study"]
+position = Vector2(-162.778, 66.6666)
+scale = Vector2(0.973937, 0.978415)
 texture = ExtResource("7_k1xee")
 
-[node name="Curtain" type="Sprite2D" parent="."]
-position = Vector2(291.5, 59.75)
-scale = Vector2(1.82188, 1.69718)
+[node name="Curtain" type="Sprite2D" parent="study"]
+position = Vector2(-158.056, -146.806)
+scale = Vector2(1.01215, 0.94288)
 texture = ExtResource("8_hp5ug")
 
-[node name="Ipad" type="Sprite2D" parent="."]
-position = Vector2(825, 466)
-scale = Vector2(1.73901, 1.55769)
+[node name="Ipad" type="Sprite2D" parent="study"]
+position = Vector2(138.333, 78.8889)
+scale = Vector2(0.966117, 0.865384)
 texture = ExtResource("9_0bwpl")
 
 [connection signal="pressed" from="study/exit_icon/exitButton" to="." method="_on_exit_button_pressed"]

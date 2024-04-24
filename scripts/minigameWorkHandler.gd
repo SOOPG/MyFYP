@@ -104,8 +104,8 @@ func _on_grocer_button_pressed(button_index):
 	if current_order_texture == selected_item_texture:
 		correctOrder+=1
 		print("Correct item selected!")
-		#Let players do 5 times
-		if correctOrder<5:
+		#Let players do x times
+		if correctOrder<7:
 			# Pick a new random item for grocer_order
 			select_new_grocer_order()  
 		else:
