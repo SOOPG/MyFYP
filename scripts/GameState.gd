@@ -20,7 +20,10 @@ var playerHasDoneHangout = false
 var playerHasDoneJob = false
 var playerHasDoneStudy = false
 
+var sleep_fact_index = 0
 var hangout_fact_index = 0
+var study_fact_index = 0
+var work_fact_index = 0
 
 func modify_player_stats(energyModifer,stressModifer,studyModifer):
 	energy = energy + energyModifer

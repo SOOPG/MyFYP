@@ -12,8 +12,6 @@ var friends_facts = [
 	"res://assets/scenes/stress facts/hangout/friends_fact_7.png",
 	]
 	
-# Member variable to keep track of the fact index
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	hangoutAnimationPlayer()

@@ -31,7 +31,7 @@ func _on_hangout_button_pressed():
 func _on_work_button_pressed():
 	if GameState.playerHasDoneJob == true:
 		dispMsgToClass($statCheckerMsg, "I've done my job already...", 3.0)
-	elif GameState.energy < 30:
+	elif GameState.energy < 40:
 		#Show a text to player too tired
 		dispMsgToClass($statCheckerMsg, "I'm too tired...", 3.0)
 	elif GameState.stress > 60:

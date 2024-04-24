@@ -205,21 +205,20 @@ func _on_attendClassAnimationFinished(anim_name):
 		update_room_to_time()
 
 func sleepAnimationPlayer():
-	
-	if fact_index < stress_facts.size():
+	if GameState.sleep_fact_index< stress_facts.size():
 		# Load the texture for the next fact
-		var fact_texture = load(stress_facts[fact_index])
+		var fact_texture = load(stress_facts[GameState.sleep_fact_index])
 		# Set the sprite texture to the next fact
 		sleep_fact_scene.texture = fact_texture
-		# Increment the index for the next call
-		fact_index += 1
-	
+
 	#Play animation
 	$sleepAnimationPlayer/sleepFact.visible = true
 	$sleepAnimationPlayer.play("sleep")
 
 func _on_sleep_animation_player_animation_finished(anim_name):
 	if anim_name == "sleep":
+		# Increment the index for the next call
+		GameState.sleep_fact_index+=1
 		#Advance to the next day, set as morning
 		GameState.current_time_of_day = GameState.TimeOfDay.MORNING
 		#reset Player Has Done Study, Work, Hangout

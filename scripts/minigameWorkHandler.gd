@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var timer = $work/minigameTimer
 @onready var timer_label = $work/timerLabel
 @onready var grocer_order = $work/grocerOrder
+@onready var work_fact_scene = $winAnimationPlayer/workFacts
 
 enum GrocerItems {
 	item1, # corresponds to grocer_1.png
@@ -41,14 +42,26 @@ var grocer_textures={
 	GrocerItems.item9:preload("res://assets/scenes/minigames/work/grocery/grocer_9.png")
 }
 
+var work_facts = [
+	"res://assets/scenes/stress facts/work/work_facts_1.png",
+	"res://assets/scenes/stress facts/work/work_facts_2.png",
+	"res://assets/scenes/stress facts/work/work_facts_3.png",
+	"res://assets/scenes/stress facts/work/work_facts_4.png",
+	"res://assets/scenes/stress facts/work/work_facts_5.png",
+	"res://assets/scenes/stress facts/work/work_facts_6.png",
+	"res://assets/scenes/stress facts/work/work_facts_7.png",
+	]
+
 var time_left = 20
 var correctOrder = 0
+var win = false
 
 # Initialize with an invalid index
 var last_item_index = -1 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	# connect buttons to texture
 	connect_buttons_to_textures()
 	# Start Timer
@@ -92,15 +105,26 @@ func _on_grocer_button_pressed(button_index):
 			# Pick a new random item for grocer_order
 			select_new_grocer_order()  
 		else:
-			# Win minigame, show the work facts
-			
-			# Modify Player Stats
-			GameState.modify_player_stats(-40,35,0)
-			GameState.modify_player_money(35)
+			win = true
+			timer.stop()
 			# Set player has done job
 			GameState.playerHasDoneJob=true
+			GameState.modify_player_stats(-40,35,0)
+			GameState.modify_player_money(35)
 			GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
-			get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+			# Win minigame, show the work facts
+			play_win_animation()
+
+func play_win_animation():
+	if GameState.work_fact_index < work_facts.size():	
+		# Load the texture for the next fact
+		var fact_texture = load(work_facts[GameState.work_fact_index])
+		# Set the sprite texture to the next fact
+		work_fact_scene.texture = fact_texture
+		
+	#Play the animation
+	$winAnimationPlayer/workFacts.visible = true
+	$winAnimationPlayer.play("minigameWin")
 
 func select_new_grocer_order():
 	var random_item_index = last_item_index
@@ -119,7 +143,7 @@ func start_minigame_timer():
 	timer.start()
 
 func _process(delta):
-	if timer.is_stopped():
+	if timer.is_stopped() && win == false:
 		_on_exit_button_pressed()
 		return
 	# Update the timer label text every frame with the remaining time
@@ -140,3 +164,8 @@ func _on_minigame_timer_timeout():
 	# Set player has done job
 	GameState.playerHasDoneJob=true
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+
+func _on_win_animation_player_animation_finished(anim_name):
+	if anim_name == "minigameWin":
+		GameState.work_fact_index+=1
+		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
