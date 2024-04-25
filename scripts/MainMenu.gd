@@ -5,7 +5,9 @@ func _ready():
 	pass # Replace with function body.
 
 func _on_button_newgame_pressed():
-	# Start game
+	# Reset Game state
+	GameState.new_game()
+	# Loading the home scene
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
 
 

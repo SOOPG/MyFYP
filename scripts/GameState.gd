@@ -46,3 +46,27 @@ func reset_player_interaction():
 
 func pay_rental(rentalModifer):
 	money = money + rentalModifer
+	
+
+# New Game
+func new_game():
+# 	Reset time of day
+	current_time_of_day = TimeOfDay.MORNING
+	
+	# Reset player stats
+	energy = 100
+	stress = 0
+	study = 0
+	money = 30  
+	day = 1  
+
+	# Reset player interactions
+	playerHasDoneHangout = false
+	playerHasDoneJob = false
+	playerHasDoneStudy = false
+
+	# Reset fact indices
+	sleep_fact_index = 0
+	hangout_fact_index = 0
+	study_fact_index = 0
+	work_fact_index = 0
