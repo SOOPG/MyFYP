@@ -11,6 +11,7 @@ extends CanvasLayer
 @onready var curtain_distraction= $study/Curtain/CurtainArea
 @onready var ipad_distraction= $study/Ipad/IpadArea
 @onready var study_fact_scene= $winAnimationPlayer/studyFacts
+@onready var minigame_fail_scene= $minigameFail
 
 var study_progress = [
 	"res://assets/scenes/minigames/study/study_progress/study-progress1.png",
@@ -138,11 +139,10 @@ func start_minigame_timer():
 	timer.start()
 
 func _on_exit_button_pressed():
-	# Apply penalty to player
+	timer.stop()
 	# Display minigame fail scene
-	# Set player has done study
-	GameState.playerHasDoneStudy=true
-	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+	minigame_fail_scene.visible = true
+
 
 func play_win_animation():
 	if GameState.study_fact_index < study_facts.size():	
@@ -157,9 +157,14 @@ func play_win_animation():
 func _on_win_animation_player_animation_finished(anim_name):
 	if anim_name == "minigameWin":
 		GameState.work_fact_index+=1
-		GameState.playerHasDoneJob=true
+		GameState.playerHasDoneStudy=true
 	# Decrease Energy, Increase Stress, Increase Study
 	GameState.modify_player_stats(-30,35,16)
 	if GameState.current_time_of_day==GameState.TimeOfDay.AFTERNOON:
 		GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
+		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+
+
+func _on_minigame_fail_exit_button_pressed():
+		GameState.modify_player_stats(-15,17,0)
 		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")

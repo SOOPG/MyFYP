@@ -37,6 +37,7 @@ func _on_hangout_animation_player_animation_finished(anim_name):
 		GameState.current_time_of_day = GameState.TimeOfDay.NIGHT
 		# Modify : (Energy, Stress, Study)
 		GameState.modify_player_stats(-33,-50,0)
+		GameState.modify_player_money(-3)
 		GameState.playerHasDoneHangout=true
 		$hangoutAnimationPlayer/hangout.visible = false
 		$hangoutAnimationPlayer/hangoutFact.visible = false

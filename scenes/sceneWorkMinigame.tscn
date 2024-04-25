@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://cer8nxmw5f5wj"]
+[gd_scene load_steps=21 format=3 uid="uid://cer8nxmw5f5wj"]
 
 [ext_resource type="Texture2D" uid="uid://c2jimydvnjj6y" path="res://assets/scenes/minigames/work/work_scene.png" id="1_4qjdk"]
 [ext_resource type="Script" path="res://scripts/minigameWorkHandler.gd" id="1_an0le"]
 [ext_resource type="Texture2D" uid="uid://bgv53sj8nm8dr" path="res://assets/sprites/ui/exit_icon.png" id="3_hn76j"]
 [ext_resource type="Texture2D" uid="uid://dd5v3g6p32wct" path="res://assets/scenes/minigames/work/grocery/grocer_1.png" id="4_5oac3"]
 [ext_resource type="Texture2D" uid="uid://cq8vp3j6mkqhq" path="res://assets/scenes/stress facts/work/work_facts_1.png" id="5_r6so4"]
+[ext_resource type="Texture2D" uid="uid://bhs1c8823gmpc" path="res://assets/scenes/menus/minigame_fail.png" id="6_l631l"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hns0r"]
 
@@ -62,6 +63,8 @@ _data = {
 "RESET": SubResource("Animation_xq720"),
 "minigameWin": SubResource("Animation_rrkwh")
 }
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s5krr"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_an0le")
@@ -177,6 +180,20 @@ position = Vector2(576.25, 323.75)
 scale = Vector2(0.59974, 0.600463)
 texture = ExtResource("5_r6so4")
 
+[node name="minigameFail" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576.125, 323.625)
+scale = Vector2(0.59987, 0.602546)
+texture = ExtResource("6_l631l")
+
+[node name="exitMiniGame" type="Button" parent="minigameFail"]
+offset_left = -140.0
+offset_top = 178.0
+offset_right = 143.0
+offset_bottom = 461.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s5krr")
+
 [connection signal="pressed" from="work/exit_icon/exitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="timeout" from="work/minigameTimer" to="." method="_on_minigame_timer_timeout"]
 [connection signal="animation_finished" from="winAnimationPlayer" to="." method="_on_win_animation_player_animation_finished"]
+[connection signal="pressed" from="minigameFail/exitMiniGame" to="." method="_on_minigame_exit_button_pressed"]

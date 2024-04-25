@@ -58,7 +58,7 @@ func new_game():
 	stress = 0
 	study = 0
 	money = 30  
-	day = 1  
+	day = 1
 
 	# Reset player interactions
 	playerHasDoneHangout = false

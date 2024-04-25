@@ -13,6 +13,8 @@ extends CanvasLayer
 @onready var calandar_ui = $ColorRect/HBoxContainer/day
 @onready var money_ui = $ColorRect/Money
 @onready var sleep_fact_scene = $sleepAnimationPlayer/sleepFact
+@onready var gameover_stress_scene = $GameOverStress
+@onready var gameover_rent_scene = $GameOverRent
 
 var stress_facts = [
 	"res://assets/scenes/stress facts/sleep/sleep_facts_1.png",
@@ -119,6 +121,11 @@ func _ready():
 	door_button.mouse_entered.connect(self._on_door_mouse_entered)
 	door_button.mouse_exited.connect(self._on_door_mouse_exited)
 
+func _process(delta):
+	#Check if player's stress >= 100
+	if GameState.stress >= 100:
+		gameover_stress_scene.visible = true
+
 #Function For Displaying User Messages
 func dispMsgToClass(label: Label, message: String, duration: float):
 	if not label:
@@ -160,36 +167,47 @@ func _on_bed_button_pressed():
 
 #Player interact with study table
 func _on_study_button_pressed():
-	if GameState.current_time_of_day == GameState.TimeOfDay.MORNING:
+	if GameState.current_time_of_day == GameState.TimeOfDay.MORNING and GameState.day != 7:
 		#If morning, notify player that they have to attend class
 		dispMsgToClass($Message, "I need to attend class first...", 3.0)
-	elif GameState.energy <40:
+	elif GameState.energy < 40:
 			#If too tired, notify player
 		dispMsgToClass($Message, "I'm too tired...", 3.0)
 	elif GameState.stress > 50:
 			#If too stress, notify player
 		dispMsgToClass($Message, "I'm too stress out...", 3.0)
 	elif GameState.playerHasDoneStudy == true:
-		#If already stress, notify player
+		#If already studied, notify the player
 		dispMsgToClass($Message, "I already studied for today...", 3.0)
+	elif GameState.current_time_of_day == GameState.TimeOfDay.MORNING and GameState.day == 7:
+		#If already stress, notify player
+		dispMsgToClass($Message, "I have an exam today...", 3.0)
 	else:
 		#Go to the study scene
 		get_tree().change_scene_to_file("res://scenes/sceneStudyMinigame.tscn")
 
 #Player interact with door
 func _on_door_button_pressed():
+	# If morning 
 	if GameState.current_time_of_day == GameState.TimeOfDay.MORNING:
-		# If morning, attend class when clicked on door
-		$attendClassAnimationPlayer/sceneClassroom.visible = true
-		$attendClassAnimationPlayer.play("attendClass")
-		# Increase Stress, Study Decrease Energy
-		update_energy_display(-25)
-		update_stress_display(15)
-		update_study_display(3)
+		# If not final day
+		if GameState.day != 7:
+			# Attend class when clicked on door
+			$attendClassAnimationPlayer/sceneClassroom.visible = true
+			$attendClassAnimationPlayer.play("attendClass")
+			# Increase Stress, Study Decrease Energy
+			update_energy_display(-25)
+			update_stress_display(15)
+			update_study_display(3)
+			# If Last day, play ending
+		elif GameState.day == 7:
+			get_tree().change_scene_to_file("res://scenes/sceneEnding.tscn")
+			
+	# If night, too late to go out
 	elif GameState.current_time_of_day == GameState.TimeOfDay.NIGHT:
 		dispMsgToClass($Message, "It's too late to go out now...", 3.0)
 	else:
-		#Allow Player to go to the selector menu
+		# Allow Player to go to the selector menu
 		get_tree().change_scene_to_file("res://scenes/sceneLocationSelectorMenu.tscn")
 
 func _on_attendClassAnimationFinished(anim_name):
@@ -213,19 +231,30 @@ func sleepAnimationPlayer():
 
 func _on_sleep_animation_player_animation_finished(anim_name):
 	if anim_name == "sleep":
-		# Increment the index for the next call
-		GameState.sleep_fact_index+=1
-		#Advance to the next day, set as morning
-		GameState.current_time_of_day = GameState.TimeOfDay.MORNING
-		#reset Player Has Done Study, Work, Hangout
-		GameState.reset_player_interaction()
-		update_room_to_time()
-		#Increase Energy, Decrease Stress. Advances Time
-		update_energy_display(50)
-		update_stress_display(-10)
-		update_calandar_display(1)
-		#Pay Rent
-		GameState.pay_rental(-25)
-		update_money_display()
-		# Hide the fact sprite
-		$sleepAnimationPlayer/sleepFact.visible = false
+		#Check if player has less than rental money
+		if GameState.money < 25:
+			gameover_rent_scene.visible = true
+		else:
+			# Increment the index for the next call
+			GameState.sleep_fact_index+=1
+			#Advance to the next day, set as morning
+			GameState.current_time_of_day = GameState.TimeOfDay.MORNING
+			#Reset Player Has Done Study, Work, Hangout
+			GameState.reset_player_interaction()
+			update_room_to_time()
+			#Increase Energy, Decrease Stress. Advances Time
+			update_energy_display(50)
+			update_stress_display(-10)
+			update_calandar_display(1)
+			#Pay Rent
+			GameState.pay_rental(-25)
+			update_money_display()
+			# Hide the fact sprite
+			$sleepAnimationPlayer/sleepFact.visible = false
+
+func _on_gameover_from_stress_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/sceneMainMenu.tscn")
+
+
+func _on_gameover_from_rent_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/sceneMainMenu.tscn")

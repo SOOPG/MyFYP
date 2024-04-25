@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://5ubmcimyc6ck"]
+[gd_scene load_steps=28 format=3 uid="uid://5ubmcimyc6ck"]
 
 [ext_resource type="Texture2D" uid="uid://dy56vkfeh8245" path="res://assets/scenes/apartment/room_base_time_1.png" id="1_4n0q8"]
 [ext_resource type="Script" path="res://scripts/sceneHomeHandler.gd" id="1_bwsg2"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bfw1vt15xotws" path="res://assets/sprites/environments/map_icon.png" id="8_b3opd"]
 [ext_resource type="Texture2D" uid="uid://3r7ajxunn8tq" path="res://assets/scenes/university/room_lecture.png" id="10_swu7j"]
 [ext_resource type="Texture2D" uid="uid://pd74jyj4kjh2" path="res://assets/scenes/stress facts/sleep/sleep_facts_1.png" id="11_57taq"]
+[ext_resource type="Texture2D" uid="uid://l28yp3b5qgik" path="res://assets/scenes/menus/game_over_stress.png" id="12_0ujwx"]
+[ext_resource type="Texture2D" uid="uid://dl8fv1obuxewj" path="res://assets/scenes/menus/game_over_rent.png" id="13_65fcd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oi0sv"]
 
@@ -98,6 +100,10 @@ _data = {
 "sleep": SubResource("Animation_klfld")
 }
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hrqcp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_82kf0"]
+
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_bwsg2")
 
@@ -121,6 +127,7 @@ offset_bottom = 62.0
 color = Color(0, 0, 0, 0.407843)
 
 [node name="Money" type="Label" parent="ColorRect"]
+layout_mode = 0
 offset_left = 834.0
 offset_top = 10.0
 offset_right = 941.0
@@ -161,6 +168,7 @@ scale = Vector2(1.40033, 1.48142)
 texture = ExtResource("5_2nqvh")
 
 [node name="Money2" type="Label" parent="ColorRect"]
+layout_mode = 0
 offset_left = 834.0
 offset_top = 10.0
 offset_right = 941.0
@@ -235,8 +243,36 @@ position = Vector2(576, 324)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("11_57taq")
 
+[node name="GameOverStress" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 323.75)
+scale = Vector2(0.6, 0.600463)
+texture = ExtResource("12_0ujwx")
+
+[node name="gameoverButton" type="Button" parent="GameOverStress"]
+offset_left = -142.0
+offset_top = 175.0
+offset_right = 143.0
+offset_bottom = 463.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hrqcp")
+
+[node name="GameOverRent" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(576, 324.375)
+scale = Vector2(0.6, 0.599306)
+texture = ExtResource("13_65fcd")
+
+[node name="gameoverButton" type="Button" parent="GameOverRent"]
+offset_left = -140.0
+offset_top = 178.0
+offset_right = 142.0
+offset_bottom = 462.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_82kf0")
+
 [connection signal="pressed" from="BedButton" to="." method="_on_bed_button_pressed"]
 [connection signal="pressed" from="StudyButton" to="." method="_on_study_button_pressed"]
 [connection signal="pressed" from="DoorButton" to="." method="_on_door_button_pressed"]
 [connection signal="animation_finished" from="attendClassAnimationPlayer" to="." method="_on_attendClassAnimationFinished"]
 [connection signal="animation_finished" from="sleepAnimationPlayer" to="." method="_on_sleep_animation_player_animation_finished"]
+[connection signal="pressed" from="GameOverStress/gameoverButton" to="." method="_on_gameover_from_stress_button_pressed"]
+[connection signal="pressed" from="GameOverRent/gameoverButton" to="." method="_on_gameover_from_rent_button_pressed"]

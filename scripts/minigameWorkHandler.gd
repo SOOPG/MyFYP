@@ -5,6 +5,7 @@ extends CanvasLayer
 @onready var timer_label = $work/timerLabel
 @onready var grocer_order = $work/grocerOrder
 @onready var work_fact_scene = $winAnimationPlayer/workFacts
+@onready var minigame_fail_scene = $minigameFail
 
 enum GrocerItems {
 	item1, # corresponds to grocer_1.png
@@ -150,11 +151,9 @@ func _process(delta):
 
 #If player runs out of time or exit, apply penalty to energy and stress while exit scene
 func _on_exit_button_pressed():
-	# Apply penalty to player
+	timer.stop()
 	# Display minigame fail scene
-	# Set player has done job
-	GameState.playerHasDoneJob=true
-	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+	minigame_fail_scene.visible = true
 
 func _on_win_animation_player_animation_finished(anim_name):
 	if anim_name == "minigameWin":
@@ -168,3 +167,9 @@ func _on_win_animation_player_animation_finished(anim_name):
 		GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
 		# Win minigame, show the work facts
 		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+
+
+func _on_minigame_exit_button_pressed():
+	# Apply penalty to player
+	GameState.modify_player_stats(-20,17,0)
+	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
