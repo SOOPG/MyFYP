@@ -162,7 +162,7 @@ func _on_win_animation_player_animation_finished(anim_name):
 	GameState.modify_player_stats(-30,35,16)
 	if GameState.current_time_of_day==GameState.TimeOfDay.AFTERNOON:
 		GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
-		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
 
 
 func _on_minigame_fail_exit_button_pressed():
