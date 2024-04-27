@@ -67,6 +67,7 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 	# If there is a distraction sprite and the player clicked on the one, remove the distraction
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 		if sprite.texture == distraction_texture:
+			AudioManager.play_correct_sound()
 			clear_distraction()
 
 func _on_distraction_timer_timeout():

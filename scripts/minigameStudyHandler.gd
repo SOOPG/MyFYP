@@ -108,7 +108,7 @@ func _process(delta):
 			studying_complete()
 	else:
 		# Ensure holding down is false if there are distractions
-			holding_down = false
+		holding_down = false
 	# Update the timer label text every frame with the remaining time
 	time_left = int(timer.time_left)
 	timer_label.text = str(time_left)
@@ -130,7 +130,6 @@ func studying_complete():
 	win = true
 	timer.stop()  # Stop the timer
 	play_win_animation()
-
 
 func start_minigame_timer():
 	#Starts Minigame Timer
@@ -156,7 +155,7 @@ func play_win_animation():
 
 func _on_win_animation_player_animation_finished(anim_name):
 	if anim_name == "minigameWin":
-		GameState.work_fact_index+=1
+		GameState.study_fact_index+=1
 		GameState.playerHasDoneStudy=true
 	# Decrease Energy, Increase Stress, Increase Study
 	GameState.modify_player_stats(-15,17,16)

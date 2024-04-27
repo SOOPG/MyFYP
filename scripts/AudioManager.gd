@@ -10,6 +10,7 @@ var door_open_sound = AudioStreamPlayer.new()
 var door_close_sound = AudioStreamPlayer.new()
 var class_start_sound = AudioStreamPlayer.new()
 var sleep_sound = AudioStreamPlayer.new()
+var study_sound = AudioStreamPlayer.new()
 
 func _ready():
 	# Initialize the AudioStreamPlayer nodes
@@ -22,6 +23,7 @@ func _ready():
 	door_close_sound.stream=load("res://assets/sounds/sound effect/door_closed.wav")
 	class_start_sound.stream=load("res://assets/sounds/sound effect/class.wav")
 	sleep_sound.stream=load("res://assets/sounds/sound effect/sleep.wav")
+	study_sound.stream = load("res://assets/sounds/sound effect/study_minigame/studying.wav")
 	
 	# Add them as children to ensure they are part of the scene tree
 	add_child(correct_sound)
@@ -33,6 +35,7 @@ func _ready():
 	add_child(door_close_sound)
 	add_child(class_start_sound)
 	add_child(sleep_sound)
+	add_child(study_sound)
 
 # Function to play the correct sound
 func play_correct_sound():
@@ -72,3 +75,6 @@ func stop_all_sounds():
 	confirm_action_sound.play()
 	cancel_action_sound.play()
 	class_start_sound.play()
+
+func play_studying_sound():
+		study_sound.play()

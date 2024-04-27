@@ -53,7 +53,7 @@ var work_facts = [
 	"res://assets/scenes/stress facts/work/work_facts_7.png",
 	]
 
-var time_left = 20
+var time_left = 35
 var correctOrder = 0
 
 # Stop timer based on condition, 
@@ -168,7 +168,7 @@ func _on_win_animation_player_animation_finished(anim_name):
 		# Player Energy Reduced while Stress Increased
 		GameState.modify_player_stats(-31,17,0)
 		# Player Earns Money
-		GameState.modify_player_money(31)
+		GameState.modify_player_money(56)
 		GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
 		# Win minigame, show the work facts
 		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
