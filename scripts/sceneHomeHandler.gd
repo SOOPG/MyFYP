@@ -39,6 +39,7 @@ func update_room_to_time():
 			room_sprite.texture = preload("res://assets/scenes/apartment/room_base_time_2.png")
 		GameState.TimeOfDay.NIGHT:
 			room_sprite.texture = preload("res://assets/scenes/apartment/room_base_time_3.png")
+
 #To Update the Energy
 func update_energy_display(modifier :int):
 	GameState.energy = GameState.energy + modifier
@@ -53,6 +54,7 @@ func update_energy_display(modifier :int):
 		energy_ui.texture = load("res://assets/sprites/ui/status_bars/energy/energy_level_75.png")
 	elif GameState.energy == 100:
 		energy_ui.texture = load("res://assets/sprites/ui/status_bars/energy/energy_level_100.png")
+
 #To Update the Stress
 func update_stress_display(modifier :int):
 	GameState.stress = GameState.stress + modifier
@@ -67,6 +69,7 @@ func update_stress_display(modifier :int):
 		stress_ui.texture = load("res://assets/sprites/ui/status_bars/stress/stress_level_75.png")
 	elif GameState.stress == 100:
 		stress_ui.texture = load("res://assets/sprites/ui/status_bars/stress/stress_level_100.png")
+
 #To Update the Study
 func update_study_display(modifier :int):
 	GameState.study = GameState.study + modifier
@@ -100,6 +103,7 @@ func update_calandar_display(increment :int):
 			calandar_ui.texture=load("res://assets/sprites/ui/status_bars/calendar/day_6.png")
 		7:
 			calandar_ui.texture=load("res://assets/sprites/ui/status_bars/calendar/day_7.png")
+
 #To Update the Money
 func update_money_display():
 	money_ui.text = str(GameState.money)
@@ -214,9 +218,10 @@ func _on_door_button_pressed():
 			AudioManager.play_class_start_sound()
 			$attendClassAnimationPlayer.play("attendClass")
 			# Increase Stress, Study Decrease Energy
-			update_energy_display(-13)
-			update_stress_display(15)
-			update_study_display(3)
+			GameState.modify_player_stats(-13,15,3)
+			update_energy_display(0)
+			update_stress_display(0)
+			update_study_display(0)
 			# If Last day, play ending
 		elif GameState.day == 7:
 			AudioManager.stop_all_music()
@@ -267,11 +272,12 @@ func _on_sleep_animation_player_animation_finished(anim_name):
 			#Reset Player Has Done Study, Work, Hangout
 			GameState.reset_player_interaction()
 			#Increase Energy, Decrease Stress. Advances Time
-			update_energy_display(63)
-			update_stress_display(-10)
-			update_calandar_display(1)
+			GameState.modify_player_stats(63,-10,0)
+			update_energy_display(0)
+			update_stress_display(0)
 			#Pay Rent
 			GameState.pay_rental(-25)
+			update_calandar_display(1)
 			update_money_display()
 			update_room_to_time()
 			# Hide the fact sprite
