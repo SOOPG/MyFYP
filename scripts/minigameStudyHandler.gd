@@ -159,12 +159,13 @@ func _on_win_animation_player_animation_finished(anim_name):
 		GameState.work_fact_index+=1
 		GameState.playerHasDoneStudy=true
 	# Decrease Energy, Increase Stress, Increase Study
-	GameState.modify_player_stats(-30,35,16)
+	GameState.modify_player_stats(-15,17,16)
 	if GameState.current_time_of_day==GameState.TimeOfDay.AFTERNOON:
 		GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
 
 
 func _on_minigame_fail_exit_button_pressed():
-		GameState.modify_player_stats(-15,17,0)
+		GameState.modify_player_stats(-30,30,0)
+		AudioManager.play_cancel_action_sound()
 		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")

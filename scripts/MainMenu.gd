@@ -5,6 +5,7 @@ func _ready():
 	pass # Replace with function body.
 
 func _on_button_newgame_pressed():
+	AudioManager.play_confirm_action_sound()
 	# Reset Game state
 	GameState.new_game()
 	# Loading the home scene
@@ -12,6 +13,7 @@ func _on_button_newgame_pressed():
 
 
 func _on_button_tutorial_pressed():
+	AudioManager.play_confirm_action_sound()
 	get_tree().change_scene_to_file("res://scenes/sceneTutorial.tscn")
 
 

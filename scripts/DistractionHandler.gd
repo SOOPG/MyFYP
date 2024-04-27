@@ -4,13 +4,13 @@ extends Area2D
 @export var idle_texture: Texture
 @export var distraction_texture: Texture
 # Minimum Time for Distraction to re-appear
-@export var min_distraction_interval: float = 3.0
+@export var min_distraction_interval: float = 4.0
 # Maximum Time for Distraction to re-appear
-@export var max_distraction_interval: float = 5.0
+@export var max_distraction_interval: float = 6.0
 # Minimum Cool Down
-@export var min_cooldown_time: float = 3.0
+@export var min_cooldown_time: float = 4.0
 # Maximum Cool Down
-@export var max_cooldown_time: float = 5.0
+@export var max_cooldown_time: float = 6.0
 
 var distraction_timer = Timer.new()
 var cooldown_timer = Timer.new()
@@ -23,7 +23,7 @@ signal distraction_cleared(name)
 # Global script or singleton to manage active distractions
 var active_distractions = 0
 # Adjust based on desired difficulty
-var required_active_distractions = 3  
+var required_active_distractions = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,9 +51,9 @@ func _ready():
 
 func maybe_start_distraction():
 	# Determine the chance to start based on the number of active distractions
-	var chance_to_start = 0.5  # default chance
-	if active_distractions < required_active_distractions:
-		chance_to_start = 1.0  # increase chance if fewer than required distractions are active
+	var chance_to_start = 1.0  # default chance
+	if active_distractions > required_active_distractions:
+		chance_to_start = 0.4  # increase chance if fewer than required distractions are active
 
 	# Randomly decide if this distraction should start now based on the chance
 	if randf() < chance_to_start:

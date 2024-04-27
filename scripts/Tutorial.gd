@@ -14,6 +14,7 @@ func _ready():
 	preload("res://assets/scenes/menus/tutorial_1.png")
 
 func _on_next_pressed():
+	AudioManager.play_confirm_action_sound()
 	current_page += 1
 	# Check where the tutorial page currently is at
 	if current_page >= tutorial_pages.size():

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bqi6cw4lupxim"
+path="res://.godot/imported/door_closed.wav-8b9b9a63c5d3bd2656f1e0c213352336.sample"
+
+[deps]
+
+source_file="res://assets/sounds/sound effect/door_closed.wav"
+dest_files=["res://.godot/imported/door_closed.wav-8b9b9a63c5d3bd2656f1e0c213352336.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

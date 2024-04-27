@@ -13,7 +13,7 @@ var current_time_of_day = TimeOfDay.MORNING
 var energy = 100
 var stress = 0
 var study = 0
-var money = 30
+var money = 51
 var day = 1
 
 var playerHasDoneHangout = false
@@ -57,7 +57,7 @@ func new_game():
 	energy = 100
 	stress = 0
 	study = 0
-	money = 30  
+	money = 51 
 	day = 1
 
 	# Reset player interactions

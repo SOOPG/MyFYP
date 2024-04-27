@@ -99,7 +99,7 @@ offset_bottom = 45.0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_cy16k")
 
 [node name="minigameTimer" type="Timer" parent="study"]
-wait_time = 60.0
+wait_time = 75.0
 one_shot = true
 autostart = true
 

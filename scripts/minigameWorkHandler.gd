@@ -103,6 +103,8 @@ func _on_grocer_button_pressed(button_index):
 	var selected_item_texture = grocer_textures[button_index]
 
 	if current_order_texture == selected_item_texture:
+		# Play Correct Sound
+		AudioManager.play_correct_sound()
 		correctOrder+=1
 		print("Correct item selected!")
 		#Let players do x times
@@ -113,6 +115,9 @@ func _on_grocer_button_pressed(button_index):
 			win = true
 			timer.stop()
 			play_win_animation()
+	elif current_order_texture != selected_item_texture:
+		# Play Wrong Sound
+		AudioManager.play_wrong_sound()
 
 func play_win_animation():
 	if GameState.work_fact_index < work_facts.size():	
@@ -161,9 +166,9 @@ func _on_win_animation_player_animation_finished(anim_name):
 		# Set player has done job
 		GameState.playerHasDoneJob=true
 		# Player Energy Reduced while Stress Increased
-		GameState.modify_player_stats(-40,35,0)
+		GameState.modify_player_stats(-31,17,0)
 		# Player Earns Money
-		GameState.modify_player_money(35)
+		GameState.modify_player_money(31)
 		GameState.current_time_of_day=GameState.TimeOfDay.NIGHT
 		# Win minigame, show the work facts
 		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
@@ -171,5 +176,6 @@ func _on_win_animation_player_animation_finished(anim_name):
 
 func _on_minigame_exit_button_pressed():
 	# Apply penalty to player
-	GameState.modify_player_stats(-20,17,0)
+	AudioManager.play_cancel_action_sound()
+	GameState.modify_player_stats(-20,35,0)
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")

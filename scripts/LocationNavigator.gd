@@ -16,6 +16,7 @@ func _ready():
 	pass # Replace with function body.
 
 func _on_return_button_pressed():
+	AudioManager.play_door_closed_sound()
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
 
 
@@ -26,6 +27,7 @@ func _on_hangout_button_pressed():
 		#Show a text to player too tired
 		dispMsgToClass($statCheckerMsg, "I'm too tired...", 3.0)
 	else:
+		AudioManager.play_confirm_action_sound()
 		get_tree().change_scene_to_file("res://scenes/sceneLocationHangout.tscn")
 
 func _on_work_button_pressed():
@@ -38,7 +40,9 @@ func _on_work_button_pressed():
 		#Show a text to player too tired
 		dispMsgToClass($statCheckerMsg, "I'm too stress...", 3.0)	
 	else:
+		AudioManager.play_confirm_action_sound()
 		get_tree().change_scene_to_file("res://scenes/sceneWorkMinigame.tscn")
 
 func _on_home_button_pressed():
+	AudioManager.play_door_closed_sound()
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")

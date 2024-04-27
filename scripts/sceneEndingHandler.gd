@@ -27,6 +27,7 @@ func _ready():
 	if GameState.study > 60:
 		# Show Winning Screen
 		win_screen.visible = true
+		AudioManager.play_game_win_sound()
 	# Else player fails, 
 	else:
 			# Show Losing Screen
@@ -47,6 +48,8 @@ func _on_congratulation_player_animation_finished(anim_name):
 	game_win_button.visible=true
 
 func _on_gamewin_button_pressed():
+	#Stop Sound
+	AudioManager.stop_all_sounds()
 	get_tree().change_scene_to_file("res://scenes/sceneMainMenu.tscn")
 
 #Game Over

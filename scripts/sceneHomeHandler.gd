@@ -42,43 +42,43 @@ func update_room_to_time():
 func update_energy_display(modifier :int):
 	GameState.energy = GameState.energy + modifier
 	# Determine the texture to load based on the energy range
-	if GameState.energy == 0:
+	if GameState.energy < 25:
 		energy_ui.texture = load("res://assets/sprites/ui/status_bars/energy/energy_level_0.png")
-	elif GameState.energy > 0 and GameState.energy <= 25:
+	elif GameState.energy < 50:
 		energy_ui.texture = load("res://assets/sprites/ui/status_bars/energy/energy_level_25.png")
-	elif GameState.energy > 25 and GameState.energy <= 50:
+	elif GameState.energy < 75:
 		energy_ui.texture = load("res://assets/sprites/ui/status_bars/energy/energy_level_50.png")
-	elif GameState.energy > 50 and GameState.energy <= 75:
+	elif GameState.energy < 100:
 		energy_ui.texture = load("res://assets/sprites/ui/status_bars/energy/energy_level_75.png")
-	elif GameState.energy > 75:
+	elif GameState.energy == 100:
 		energy_ui.texture = load("res://assets/sprites/ui/status_bars/energy/energy_level_100.png")
 #To Update the Stress
 func update_stress_display(modifier :int):
 	GameState.stress = GameState.stress + modifier
 	# Determine the texture to load based on the energy range
-	if GameState.stress == 0:
+	if GameState.stress < 25:
 		stress_ui.texture = load("res://assets/sprites/ui/status_bars/stress/stress_level_0.png")
-	elif GameState.stress > 0 and GameState.stress <= 25:
+	elif GameState.stress < 50:
 		stress_ui.texture = load("res://assets/sprites/ui/status_bars/stress/stress_level_25.png")
-	elif GameState.stress > 25 and GameState.stress <= 50:
+	elif GameState.stress < 75:
 		stress_ui.texture = load("res://assets/sprites/ui/status_bars/stress/stress_level_50.png")
-	elif GameState.stress > 50 and GameState.stress <= 75:
+	elif GameState.stress < 100:
 		stress_ui.texture = load("res://assets/sprites/ui/status_bars/stress/stress_level_75.png")
-	elif GameState.stress > 75:
+	elif GameState.stress == 100:
 		stress_ui.texture = load("res://assets/sprites/ui/status_bars/stress/stress_level_100.png")
 #To Update the Study
 func update_study_display(modifier :int):
 	GameState.study = GameState.study + modifier
 	# Determine the texture to load based on the energy range
-	if GameState.study == 0:
+	if GameState.study < 25:
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_0.png")
-	elif GameState.study > 0 and GameState.study <= 25:
+	elif GameState.study < 50:
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_25.png")
-	elif GameState.study > 25 and GameState.study <= 50:
+	elif GameState.study < 75:
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_50.png")
-	elif GameState.study > 50 and GameState.study <= 75:
+	elif GameState.study < 100:
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_75.png")
-	elif GameState.study > 75:
+	elif GameState.study == 100:
 		study_ui.texture = load("res://assets/sprites/ui/status_bars/study/study_level_100.png")
 #To Update the Calandar
 func update_calandar_display(increment :int):
@@ -155,34 +155,43 @@ func _on_door_mouse_exited():
 #Player interact with bed
 func _on_bed_button_pressed():
 	if GameState.current_time_of_day == GameState.TimeOfDay.MORNING:
+		AudioManager.play_cancel_action_sound()
 		#If morning, notify player that they cant sleep now
 		dispMsgToClass($Message, "I can't sleep now...", 3.0)
 	else:
-		if GameState.energy>60:
-		#If morning, notify player that they cant sleep now
+		if GameState.energy>60 and not GameState.current_time_of_day == GameState.TimeOfDay.NIGHT:
+			AudioManager.play_cancel_action_sound()
+			#If morning, notify player that they cant sleep now
 			dispMsgToClass($Message, "I'm not tired...", 3.0)
 		else:
-		#Sleep Animation
+			AudioManager.play_sleep_sound()
+			#Sleep Animation
 			sleepAnimationPlayer()
 
 #Player interact with study table
 func _on_study_button_pressed():
 	if GameState.current_time_of_day == GameState.TimeOfDay.MORNING and GameState.day != 7:
 		#If morning, notify player that they have to attend class
+		AudioManager.play_cancel_action_sound()
 		dispMsgToClass($Message, "I need to attend class first...", 3.0)
 	elif GameState.energy < 40:
+		AudioManager.play_cancel_action_sound()
 			#If too tired, notify player
 		dispMsgToClass($Message, "I'm too tired...", 3.0)
 	elif GameState.stress > 50:
+		AudioManager.play_cancel_action_sound()
 			#If too stress, notify player
 		dispMsgToClass($Message, "I'm too stress out...", 3.0)
 	elif GameState.playerHasDoneStudy == true:
+		AudioManager.play_cancel_action_sound()
 		#If already studied, notify the player
 		dispMsgToClass($Message, "I already studied for today...", 3.0)
 	elif GameState.current_time_of_day == GameState.TimeOfDay.MORNING and GameState.day == 7:
+		AudioManager.play_cancel_action_sound()
 		#If already stress, notify player
 		dispMsgToClass($Message, "I have an exam today...", 3.0)
 	else:
+		AudioManager.play_confirm_action_sound()
 		#Go to the study scene
 		get_tree().change_scene_to_file("res://scenes/sceneStudyMinigame.tscn")
 
@@ -192,11 +201,13 @@ func _on_door_button_pressed():
 	if GameState.current_time_of_day == GameState.TimeOfDay.MORNING:
 		# If not final day
 		if GameState.day != 7:
+			AudioManager.play_door_open_sound()
 			# Attend class when clicked on door
 			$attendClassAnimationPlayer/sceneClassroom.visible = true
+			AudioManager.play_class_start_sound()
 			$attendClassAnimationPlayer.play("attendClass")
 			# Increase Stress, Study Decrease Energy
-			update_energy_display(-25)
+			update_energy_display(-13)
 			update_stress_display(15)
 			update_study_display(3)
 			# If Last day, play ending
@@ -205,8 +216,10 @@ func _on_door_button_pressed():
 			
 	# If night, too late to go out
 	elif GameState.current_time_of_day == GameState.TimeOfDay.NIGHT:
+		AudioManager.play_cancel_action_sound()
 		dispMsgToClass($Message, "It's too late to go out now...", 3.0)
 	else:
+		AudioManager.play_door_open_sound()
 		# Allow Player to go to the selector menu
 		get_tree().change_scene_to_file("res://scenes/sceneLocationSelectorMenu.tscn")
 
@@ -243,7 +256,7 @@ func _on_sleep_animation_player_animation_finished(anim_name):
 			GameState.reset_player_interaction()
 			update_room_to_time()
 			#Increase Energy, Decrease Stress. Advances Time
-			update_energy_display(50)
+			update_energy_display(63)
 			update_stress_display(-10)
 			update_calandar_display(1)
 			#Pay Rent
