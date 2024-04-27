@@ -12,6 +12,7 @@ extends CanvasLayer
 @onready var ipad_distraction= $study/Ipad/IpadArea
 @onready var study_fact_scene= $winAnimationPlayer/studyFacts
 @onready var minigame_fail_scene= $minigameFail
+@onready var study_sound=$StudySound
 
 var study_progress = [
 	"res://assets/scenes/minigames/study/study_progress/study-progress1.png",
@@ -55,6 +56,7 @@ var active_distractions = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
+	AudioManager.play_study_music()
 	book_area.input_event.connect(self._on_book_area_input_event)
 	start_minigame_timer()
 	
@@ -88,16 +90,18 @@ func _on_distraction_started(distraction_name):
 func _on_distraction_cleared(distraction_name):
 	active_distractions -= 1
 
-	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if timer.is_stopped() && win == false:
+		if study_sound.playing:
+			study_sound.stop()
 		_on_exit_button_pressed()
 		return
 		
 	# If no distraction
 	if holding_down and active_distractions == 0:
+		if not study_sound.playing:
+			study_sound.play()
 		# Add the delta(1s) to total study time
 		total_study_time += delta  
 		# Update the texture based on the study time
@@ -107,6 +111,8 @@ func _process(delta):
 		if total_study_time >= TOTAL_STUDY_TIME:
 			studying_complete()
 	else:
+		if study_sound.playing:
+			study_sound.stop()
 		# Ensure holding down is false if there are distractions
 		holding_down = false
 	# Update the timer label text every frame with the remaining time
@@ -139,6 +145,7 @@ func start_minigame_timer():
 
 func _on_exit_button_pressed():
 	timer.stop()
+	AudioManager.stop_all_music()
 	# Display minigame fail scene
 	minigame_fail_scene.visible = true
 
@@ -155,6 +162,7 @@ func play_win_animation():
 
 func _on_win_animation_player_animation_finished(anim_name):
 	if anim_name == "minigameWin":
+		AudioManager.stop_all_music()
 		GameState.study_fact_index+=1
 		GameState.playerHasDoneStudy=true
 	# Decrease Energy, Increase Stress, Increase Study
@@ -165,6 +173,17 @@ func _on_win_animation_player_animation_finished(anim_name):
 
 
 func _on_minigame_fail_exit_button_pressed():
+		AudioManager.stop_all_music()
 		GameState.modify_player_stats(-30,30,0)
 		AudioManager.play_cancel_action_sound()
 		get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")
+		
+func play_study_sound():
+	if not study_sound.playing:
+		study_sound.play()
+
+func stop_sound_sound():
+	study_sound.stop()
+
+func _on_study_sound_finished():
+	play_study_sound()

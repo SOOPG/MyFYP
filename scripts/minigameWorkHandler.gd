@@ -66,7 +66,8 @@ var last_item_index = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
+	AudioManager.stop_all_music()
+	AudioManager.play_work_music()
 	# connect buttons to texture
 	connect_buttons_to_textures()
 	# Start Timer
@@ -157,11 +158,13 @@ func _process(delta):
 #If player runs out of time or exit, apply penalty to energy and stress while exit scene
 func _on_exit_button_pressed():
 	timer.stop()
+	AudioManager.stop_all_music()
 	# Display minigame fail scene
 	minigame_fail_scene.visible = true
 
 func _on_win_animation_player_animation_finished(anim_name):
 	if anim_name == "minigameWin":
+		AudioManager.stop_all_music()
 		GameState.work_fact_index+=1
 		# Set player has done job
 		GameState.playerHasDoneJob=true
@@ -175,7 +178,8 @@ func _on_win_animation_player_animation_finished(anim_name):
 
 
 func _on_minigame_exit_button_pressed():
-	# Apply penalty to player
+	AudioManager.stop_all_music()
 	AudioManager.play_cancel_action_sound()
+		# Apply penalty to player
 	GameState.modify_player_stats(-20,35,0)
 	get_tree().change_scene_to_file("res://scenes/sceneHome.tscn")

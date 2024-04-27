@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c731lsle66eo5"
+path="res://.godot/imported/hangout.wav-7a32c9300be4c1d8e7a12e5b032d6b62.sample"
+
+[deps]
+
+source_file="res://assets/sounds/sound effect/hangout.wav"
+dest_files=["res://.godot/imported/hangout.wav-7a32c9300be4c1d8e7a12e5b032d6b62.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

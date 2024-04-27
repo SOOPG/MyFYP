@@ -14,6 +14,8 @@ var friends_facts = [
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	AudioManager.stop_all_music()
+	AudioManager.play_hangout_sound()
 	hangoutAnimationPlayer()
 
 # Hangout
@@ -31,6 +33,7 @@ func hangoutAnimationPlayer():
 
 func _on_hangout_animation_player_animation_finished(anim_name):
 	if anim_name == "hangout":
+		AudioManager.stop_all_sounds()
 		# Change to next Fact
 		GameState.hangout_fact_index+=1
 		# Set Time to Night

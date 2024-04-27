@@ -1,3 +1,4 @@
+#sceneHomeHandler
 extends CanvasLayer
 
 @onready var room_sprite = $room
@@ -106,6 +107,7 @@ func update_money_display():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
+	AudioManager.play_room_music()
 	update_room_to_time()
 	update_energy_display(0)
 	update_stress_display(0)
@@ -124,6 +126,8 @@ func _ready():
 func _process(delta):
 	#Check if player's stress >= 100
 	if GameState.stress >= 100:
+		AudioManager.stop_all_music()
+		AudioManager.play_gameover_sound()
 		gameover_stress_scene.visible = true
 
 #Function For Displaying User Messages
@@ -164,6 +168,7 @@ func _on_bed_button_pressed():
 			#If morning, notify player that they cant sleep now
 			dispMsgToClass($Message, "I'm not tired...", 3.0)
 		else:
+			AudioManager.stop_all_music()
 			AudioManager.play_sleep_sound()
 			#Sleep Animation
 			sleepAnimationPlayer()
@@ -191,6 +196,7 @@ func _on_study_button_pressed():
 		#If already stress, notify player
 		dispMsgToClass($Message, "I have an exam today...", 3.0)
 	else:
+		AudioManager.stop_all_music()
 		AudioManager.play_confirm_action_sound()
 		#Go to the study scene
 		get_tree().change_scene_to_file("res://scenes/sceneStudyMinigame.tscn")
@@ -201,6 +207,7 @@ func _on_door_button_pressed():
 	if GameState.current_time_of_day == GameState.TimeOfDay.MORNING:
 		# If not final day
 		if GameState.day != 7:
+			AudioManager.stop_all_music()
 			AudioManager.play_door_open_sound()
 			# Attend class when clicked on door
 			$attendClassAnimationPlayer/sceneClassroom.visible = true
@@ -212,6 +219,7 @@ func _on_door_button_pressed():
 			update_study_display(3)
 			# If Last day, play ending
 		elif GameState.day == 7:
+			AudioManager.stop_all_music()
 			get_tree().change_scene_to_file("res://scenes/sceneEnding.tscn")
 			
 	# If night, too late to go out
@@ -225,6 +233,7 @@ func _on_door_button_pressed():
 
 func _on_attendClassAnimationFinished(anim_name):
 	if anim_name == "attendClass":
+		AudioManager.play_room_music()
 		# Hide the classroom sprite
 		$attendClassAnimationPlayer/sceneClassroom.visible = false
 		# Change the time to Afternoon
@@ -246,15 +255,17 @@ func _on_sleep_animation_player_animation_finished(anim_name):
 	if anim_name == "sleep":
 		#Check if player has less than rental money
 		if GameState.money < 25:
+			AudioManager.stop_all_music()
+			AudioManager.play_gameover_sound()
 			gameover_rent_scene.visible = true
 		else:
+			AudioManager.play_room_music()
 			# Increment the index for the next call
 			GameState.sleep_fact_index+=1
 			#Advance to the next day, set as morning
 			GameState.current_time_of_day = GameState.TimeOfDay.MORNING
 			#Reset Player Has Done Study, Work, Hangout
 			GameState.reset_player_interaction()
-			update_room_to_time()
 			#Increase Energy, Decrease Stress. Advances Time
 			update_energy_display(63)
 			update_stress_display(-10)
@@ -262,12 +273,15 @@ func _on_sleep_animation_player_animation_finished(anim_name):
 			#Pay Rent
 			GameState.pay_rental(-25)
 			update_money_display()
+			update_room_to_time()
 			# Hide the fact sprite
 			$sleepAnimationPlayer/sleepFact.visible = false
 
 func _on_gameover_from_stress_button_pressed():
+	AudioManager.stop_all_music()
 	get_tree().change_scene_to_file("res://scenes/sceneMainMenu.tscn")
 
 
 func _on_gameover_from_rent_button_pressed():
+	AudioManager.stop_all_music()
 	get_tree().change_scene_to_file("res://scenes/sceneMainMenu.tscn")
