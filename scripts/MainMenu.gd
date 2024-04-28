@@ -22,6 +22,3 @@ func _on_button_tutorial_pressed():
 func _on_button_exit_pressed():
 	# Close the game
 	get_tree().quit()  
-
-func _on_button_volume_pressed():
-	pass # Replace with function body.
