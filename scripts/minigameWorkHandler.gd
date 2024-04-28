@@ -165,7 +165,8 @@ func _on_exit_button_pressed():
 func _on_win_animation_player_animation_finished(anim_name):
 	if anim_name == "minigameWin":
 		AudioManager.stop_all_music()
-		GameState.work_fact_index+=1
+		# Randomize work facts
+		GameState.work_fact_index = randi() % 7
 		# Set player has done job
 		GameState.playerHasDoneJob=true
 		# Player Energy Reduced while Stress Increased

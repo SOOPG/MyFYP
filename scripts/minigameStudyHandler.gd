@@ -163,7 +163,8 @@ func play_win_animation():
 func _on_win_animation_player_animation_finished(anim_name):
 	if anim_name == "minigameWin":
 		AudioManager.stop_all_music()
-		GameState.study_fact_index+=1
+		# Randomize study facts
+		GameState.study_fact_index = randi() % 7
 		GameState.playerHasDoneStudy=true
 	# Decrease Energy, Increase Stress, Increase Study
 	GameState.modify_player_stats(-15,17,16)

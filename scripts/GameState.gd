@@ -65,8 +65,9 @@ func new_game():
 	playerHasDoneJob = false
 	playerHasDoneStudy = false
 
-	# Reset fact indices
-	sleep_fact_index = 0
-	hangout_fact_index = 0
-	study_fact_index = 0
-	work_fact_index = 0
+	# Randomize fact indices
+	sleep_fact_index = randi() % 7  
+	hangout_fact_index = randi() % 7  
+	study_fact_index = randi() % 7  
+	work_fact_index = randi() % 7  
+

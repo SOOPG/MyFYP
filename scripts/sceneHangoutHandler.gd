@@ -34,8 +34,8 @@ func hangoutAnimationPlayer():
 func _on_hangout_animation_player_animation_finished(anim_name):
 	if anim_name == "hangout":
 		AudioManager.stop_all_sounds()
-		# Change to next Fact
-		GameState.hangout_fact_index+=1
+		# Randomize hangout facts
+		GameState.hangout_fact_index = randi() % 7 
 		# Set Time to Night
 		GameState.current_time_of_day = GameState.TimeOfDay.NIGHT
 		# Modify : (Energy, Stress, Study)

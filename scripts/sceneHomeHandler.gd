@@ -167,7 +167,7 @@ func _on_bed_button_pressed():
 		#If morning, notify player that they cant sleep now
 		dispMsgToClass($Message, "I can't sleep now...", 3.0)
 	else:
-		if GameState.energy>60 and not GameState.current_time_of_day == GameState.TimeOfDay.NIGHT:
+		if GameState.energy>60 and not GameState.current_time_of_day == GameState.TimeOfDay.NIGHT and not GameState.current_time_of_day == GameState.TimeOfDay.AFTERNOON:
 			AudioManager.play_cancel_action_sound()
 			#If morning, notify player that they cant sleep now
 			dispMsgToClass($Message, "I'm not tired...", 3.0)
@@ -217,7 +217,7 @@ func _on_door_button_pressed():
 			$attendClassAnimationPlayer/sceneClassroom.visible = true
 			AudioManager.play_class_start_sound()
 			$attendClassAnimationPlayer.play("attendClass")
-			# Increase Stress, Study Decrease Energy
+			# Decrease Energy, Increase Stress, Increase Study 
 			GameState.modify_player_stats(-13,15,3)
 			update_energy_display(0)
 			update_stress_display(0)
@@ -265,8 +265,8 @@ func _on_sleep_animation_player_animation_finished(anim_name):
 			gameover_rent_scene.visible = true
 		else:
 			AudioManager.play_room_music()
-			# Increment the index for the next call
-			GameState.sleep_fact_index+=1
+			# Randomize sleep facts
+			GameState.sleep_fact_index = randi() % 7 
 			#Advance to the next day, set as morning
 			GameState.current_time_of_day = GameState.TimeOfDay.MORNING
 			#Reset Player Has Done Study, Work, Hangout

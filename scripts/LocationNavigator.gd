@@ -23,6 +23,8 @@ func _on_return_button_pressed():
 func _on_hangout_button_pressed():
 	if GameState.playerHasDoneHangout == true:
 		dispMsgToClass($statCheckerMsg, "I've done hangout already...", 3.0)
+	elif GameState.money < 3:
+		dispMsgToClass($statCheckerMsg, "I dont have enough money...", 3.0)
 	elif GameState.energy < 30:
 		#Show a text to player too tired
 		dispMsgToClass($statCheckerMsg, "I'm too tired...", 3.0)
